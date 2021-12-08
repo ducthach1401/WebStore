@@ -2,29 +2,8 @@ const controller = require('../controller/controller');
 const express = require('express');
 const authenUser = require('../middleware/authen.user');
 const validBody = require('../middleware/valid.body');
-const { addItemSchema, addTypeSchema, passwordSchema } = require('../DTO/DTO');
-const multer = require('multer');
-const maxSize = 5 * 1024 * 1024;
-var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, 'public/upload');
-    },
-    filename: function (req, file, callback) {
-      callback(null, file.originalname);
-    },
-    onFileUploadStart: function(file, req, res){
-      if(req.files.file.length > maxSize) {
-        return false;
-      }
-    }  
-});
-
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: maxSize
-    }
-})
+const { addItemSchema, addTypeSchema, passwordSchema, addOrderSchema } = require('../DTO/DTO');
+const { uploadFile } = require('../middleware/upload.file');
 const route = express.Router();
 
 route.route('/items')
@@ -32,7 +11,7 @@ route.route('/items')
 
 route.route('/item')
     .get(controller.getItems)
-    .post(authenUser, validBody(addItemSchema),controller.addItem);
+    .post(authenUser, validBody(addItemSchema), uploadFile,controller.addItem);
 
 route.route('/item/:id')
     .put(authenUser, validBody(addItemSchema), controller.updateItem)
@@ -60,4 +39,17 @@ route.route('/refresh')
 route.route('/password')
     .post(authenUser, validBody(passwordSchema) ,controller.updateUser);
 
+route.route('/order')
+    .all(authenUser)
+    .get(controller.getOrders)
+    .post(validBody(addOrderSchema),controller.createOrder);
+
+route.route('/order/:id')
+    .all(authenUser)
+    .put(controller.checkOrder)
+    .delete(controller.uncheckOrder);
+
+route.route('/orders')
+    .get(authenUser, controller.getAllOrders);
+    
 module.exports = route;

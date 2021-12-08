@@ -12,12 +12,14 @@ const IItem = mongoose.Schema({
 });
 
 const IType = mongoose.Schema({
+    _id: {type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId},
     type: String
 }, {
     timestamps: true
 })
 
 const IUser = mongoose.Schema({
+    _id: {type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId},
     name: {type: String, require: true},
     username: {type: String, require: true},
     password: {type: String, require: true},
@@ -26,10 +28,26 @@ const IUser = mongoose.Schema({
     timestamps: true
 });
 
+const IOrder = mongoose.Schema({
+    _id: {type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId},
+    nameUser: {type: String, require: true},
+    address: {type: String, require: true},
+    phone: {type: String, require: true},
+    name: {type: String, require: true},
+    quantity: {type: Number, require: true},
+    cost: {type: Number, require: true},
+    total: {type: Number, require: true},
+    success: {type: Boolean, default: false},
+    dateOrder: Date
+}, {
+    timestamps: true
+});
+
 const Item = mongoose.model('Item', IItem);
 const Type = mongoose.model('Type', IType);
 const User = mongoose.model('User', IUser);
-
+const Order = mongoose.model('Order', IOrder);
 module.exports.Item = Item;
 module.exports.Type = Type;
 module.exports.User = User;
+module.exports.Order = Order;

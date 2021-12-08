@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const Type = Model.Type;
 const Item = Model.Item;
 const User = Model.User;
+const Order = Model.Order;
 
 module.exports.getItemAll = async () => {
     try {
@@ -198,6 +199,78 @@ module.exports.regenerateAccessToken = async (refreshToken) => {
         }
         else {
             return null;
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.createOrder = async (data) => {
+    try {
+        const order = new Order(data);
+        await order.save();
+        return {
+            message: "Success"
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.getAllOrders = async () => {
+    try {
+        const result = await Order.find();
+        return {
+            message: 'Success',
+            result: result
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.getOrders = async (data) => {
+    try {
+        const result = await Order.find(data);
+        return {
+            message: 'Success',
+            result: result
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.checkOrder = async (filter) => {
+    try {
+        const result = await Order.updateOne(filter, {
+            success: true
+        });
+        if (result.n == 0){
+            return {
+                message: "Not found"
+            }
+        }
+        return {
+            message: "Success"
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.uncheckOrder = async (filter) => {
+    try {
+        const result = await Order.updateOne(filter, {
+            success: false
+        });
+        if (result.n == 0){
+            return {
+                message: "Not found"
+            }
+        }
+        return {
+            message: "Success"
         }
     } catch (error) {
         throw error;

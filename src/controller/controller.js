@@ -120,3 +120,41 @@ module.exports.updateUser = async (req, res) => {
     const result = await service.updateUser(filter, data);
     res.json(result)
 }
+
+module.exports.createOrder = async (req, res) => {
+    const data = {
+        ... req.body,
+        dateOrder: Date.now(),
+        total: req.body.cost * req.body.quantity
+    }
+    const result = await service.createOrder(data);
+    res.json(result)
+}
+
+module.exports.getAllOrders = async (req, res) => {
+    const result = await service.getAllOrders();
+    res.json(result)
+}
+
+
+module.exports.getOrders = async (req, res) => {
+    const filter = req.query;
+    const result = await service.getOrders(filter);
+    res.json(result)
+}
+
+module.exports.checkOrder = async (req, res) => {
+    const filter = {
+        _id: req.params.id
+    }
+    const result = await service.checkOrder(filter);
+    res.json(result)
+}
+
+module.exports.uncheckOrder = async (req, res) => {
+    const filter = {
+        _id: req.params.id
+    }
+    const result = await service.uncheckOrder(filter);
+    res.json(result)
+}
