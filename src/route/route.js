@@ -2,7 +2,7 @@ const controller = require('../controller/controller');
 const express = require('express');
 const authenUser = require('../middleware/authen.user');
 const validBody = require('../middleware/valid.body');
-const { addItemSchema, addTypeSchema, passwordSchema, addOrderSchema } = require('../DTO/DTO');
+const { addItemSchema, addTypeSchema, passwordSchema, addOrderSchema, updateNameSchema } = require('../DTO/DTO');
 const { uploadFile } = require('../middleware/upload.file');
 const route = express.Router();
 
@@ -11,7 +11,7 @@ route.route('/items')
 
 route.route('/item')
     .get(controller.getItems)
-    .post(authenUser, validBody(addItemSchema), uploadFile,controller.addItem);
+    .post(uploadFile().single('image'),controller.addItem);
 
 route.route('/item/:id')
     .put(authenUser, validBody(addItemSchema), controller.updateItem)
@@ -36,8 +36,13 @@ route.route('/login')
 route.route('/refresh')
     .post(authenUser, controller.refresh);
 
-route.route('/password')
+route.route('/user')
+    .get(authenUser, controller.getName);
+route.route('/user/password')
     .post(authenUser, validBody(passwordSchema) ,controller.updateUser);
+
+route.route('/user/name')
+    .post(authenUser, validBody(updateNameSchema) ,controller.updateUserName);
 
 route.route('/order')
     .all(authenUser)

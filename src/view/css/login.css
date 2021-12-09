@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200');
+
+body  {
+    background-image: url('https://static.pexels.com/photos/414171/pexels-photo-414171.jpeg');
+  background-size:cover;
+        -webkit-animation: slidein 100s;
+        animation: slidein 100s;
+
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+
+        -webkit-animation-direction: alternate;
+        animation-direction: alternate;              
+}
+
+@-webkit-keyframes slidein {
+from {background-position: top; background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+}
+
+@keyframes slidein {
+from {background-position: top;background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+
+}
+
+
+
+.center
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+.center h1{
+  text-align:center;
+  color:black;
+  font-family: 'Source Code Pro', monospace;
+  text-transform:uppercase;
+}
+
+.frame {
+  padding: 50px;
+  /* border: 1px solid black; */
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+.frame label {
+  font-family: 'Source Code Pro', monospace;
+  color: black;
+  width: 100px;
+}
+
+.frame button {
+  position: relative;
+  margin-top: 10px;
+  left: 105px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 17px;
+  width: 100px;
+}
+
+.frame input {
+  margin-top: 5px;
+}
+
+.frame a {
+  color: white;
+  text-decoration: none;
+}
+
+#register {
+  color: rgba(0, 0, 255, 0.589);
+  text-decoration: underline;
+  position: relative;
+  left: 110px;
+  top: 10px;
+}
+
+#register:hover{
+  color: gold;
+  cursor: pointer;
+}

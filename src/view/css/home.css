@@ -1,0 +1,36 @@
+.header{
+    font-size: large;
+    /* width: 90%  ; */
+    margin: auto;
+}
+
+.header svg {
+    margin-right: 20px;
+}
+
+#album {
+    /* width: 200px; */
+    height: 100px;
+    margin-top: 20px;
+    background-color: lightskyblue;
+    cursor: pointer;
+    user-select: none;
+}
+
+#album:hover {
+    background-color: gold;
+}
+
+.imageHome {
+    width: 60px;
+    height: 60px;
+}
+
+#loginButton {
+    position: relative;
+    right: 50px;
+}
+
+.buttonLogin {
+    width: 100px;
+}

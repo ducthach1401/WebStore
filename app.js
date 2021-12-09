@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.static(__dirname + '/src/view/'));
 
 app.use('/v1/', route);
-// app.use('/', view);
+app.use('/', view);
 
 app.listen(port, () => {
     console.log("Run Server http://localhost:8080");

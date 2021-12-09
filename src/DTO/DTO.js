@@ -18,13 +18,19 @@ module.exports.addTypeSchema = Joi.object({
 
 module.exports.passwordSchema = Joi.object({
     password: Joi.string().required().min(8).max(30)
-})
+});
 
 module.exports.addOrderSchema = Joi.object({
     nameUser: Joi.string().required(),
     address: Joi.string().required(),
     phone: Joi.string().required(),
-    name: Joi.string().required(),
-    quantity: Joi.number().required().min(1),
-    cost: Joi.number().required().min(1),
+    goods: Joi.array().items(Joi.object({
+        name: Joi.string().required(),
+        quantity: Joi.number().required().min(1),
+        cost: Joi.number().required().min(1),
+    })).required()
+});
+
+module.exports.updateNameSchema = Joi.object({
+    name: Joi.string().required().min(3)
 });

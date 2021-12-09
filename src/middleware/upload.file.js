@@ -1,6 +1,7 @@
 const multer = require('multer');
+const path = require('path');
 module.exports.uploadFile = () => {
-    return multer({
+  return multer({
     storage: multer.diskStorage({}),
     fileFilter: (req, file, cb) => {
       let ext = path.extname(file.originalname);  

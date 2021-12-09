@@ -1,7 +1,17 @@
+const { modelItem, modelType, modelOrder } = require('../serializer/serializer');
 const service = require('../service/service');
 
 module.exports.getAllItem = async (req, res) => {
     const result = await service.getItemAll();
+    result.result = result.result.map((data) => modelItem(data));
+    res.json(result);
+}
+
+module.exports.getName = async (req, res) => {
+    const data = {
+        username: res.locals.username
+    }
+    const result = await service.getName(data);
     res.json(result);
 }
 
@@ -10,6 +20,7 @@ module.exports.getItem = async (req, res) => {
         _id: req.params.id
     }
     const result = await service.getItems(id);
+    result.result = result.result.map((data) => modelItem(data));
     res.json(result);
 }
 
@@ -18,17 +29,22 @@ module.exports.getItems = async (req, res) => {
         type: req.query.type
     }
     const result = await service.getItems(type);
+    result.result = result.result.map((data) => modelItem(data));
     res.json(result);
 }
 
 module.exports.getType = async (req, res) => {
     const result = await service.getTypeAll();
+    result.result = result.result.map((data) => modelType(data));
     res.json(result);
 }
 
 module.exports.addItem = async (req, res) => {
-    const data = req.body;
-    const result = await service.addItem(data);
+    const data = {
+        ... req.body
+    };
+    const file = req.file;
+    const result = await service.addItem(data, file);
     res.json(result);
 }
 
@@ -84,7 +100,10 @@ module.exports.login = async (req, res) => {
             httpOnly: true,
             //secure: true;
         });
-        res.status(200).json({success: "ok"});
+        res.cookie('login', 'true', {
+
+        });
+        res.status(200).json({message: "Success"});
     }
     else res.status(401).json({message: "Auth failed"});
 }
@@ -121,6 +140,16 @@ module.exports.updateUser = async (req, res) => {
     res.json(result)
 }
 
+module.exports.updateUserName = async (req, res) => {
+    const filter = {
+        username: res.locals.username,
+        name: res.locals.name
+    }
+    const data = req.body;
+    const result = await service.updateUserName(filter, data);
+    res.json(result)
+}
+
 module.exports.createOrder = async (req, res) => {
     const data = {
         ... req.body,
@@ -133,6 +162,7 @@ module.exports.createOrder = async (req, res) => {
 
 module.exports.getAllOrders = async (req, res) => {
     const result = await service.getAllOrders();
+    result.result = result.result.map((data) => modelOrder(data));
     res.json(result)
 }
 
@@ -140,6 +170,7 @@ module.exports.getAllOrders = async (req, res) => {
 module.exports.getOrders = async (req, res) => {
     const filter = req.query;
     const result = await service.getOrders(filter);
+    result.result = result.result.map((data) => modelOrder(data));
     res.json(result)
 }
 

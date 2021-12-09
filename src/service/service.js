@@ -1,13 +1,19 @@
 const Model = require('../model/model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Type = Model.Type;
 const Item = Model.Item;
 const User = Model.User;
 const Order = Model.Order;
+const cloudinary = require('cloudinary').v2;
 
 module.exports.getItemAll = async () => {
     try {
         const result = await Item.find();
+        // for (let item of result){
+        //     item.image = cloudinary.image('store/' + item._id);
+        //     console.log(item.image);
+        // }
         return {
             message: 'Success',
             result: result
@@ -53,7 +59,7 @@ module.exports.addType = async (data) => {
     }
 }
 
-module.exports.addItem = async (data) => {
+module.exports.addItem = async (data, image) => {
     try {
         const check = await Type.find({
             type: data.type
@@ -63,8 +69,15 @@ module.exports.addItem = async (data) => {
                 message: 'Not found type of item'
             }
         }
-        const data = new Item(data);
-        await data.save();
+        const item = new Item(data);
+        await item.save();
+        const timestamp = Math.round(Date.now() /1000);
+        const temp = cloudinary.utils.api_sign_request(timestamp, process.env.API_SECRET);
+        const upload = cloudinary.uploader.upload(image.path, {public_id: item._id , folder: "store"}, (err) => {
+            if (err) {
+                throw err;
+            }
+        });
         return {
             message: 'Success'
         }
@@ -139,6 +152,17 @@ module.exports.createUser = async (data) => {
 module.exports.updateUser = async (filter, data) => {
     try {
         data.password = bcrypt.hashSync(data.password, 10);
+        const result = await User.updateOne(filter, data);
+        return {
+            message: 'Success'
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.updateUserName  = async (filter, data) => {
+    try {
         const result = await User.updateOne(filter, data);
         return {
             message: 'Success'
@@ -271,6 +295,25 @@ module.exports.uncheckOrder = async (filter) => {
         }
         return {
             message: "Success"
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports.getName = async (username) => {
+    try {
+        const result = await User.findOne(username);
+        if (!result){
+            return {
+                message: "Not Found"
+            }
+        }
+        return {
+            message: "Success",
+            result: {
+                name: result.name
+            }
         }
     } catch (error) {
         throw error;

@@ -5,7 +5,7 @@ const IItem = mongoose.Schema({
     name: {type: String, require: true},
     description: {type: String},
     cost: {type: Number, require: true},
-    type: {type: String},
+    type: {type: String, require: true},
     link: {type: String}
 },{
     timestamps: true
@@ -13,7 +13,7 @@ const IItem = mongoose.Schema({
 
 const IType = mongoose.Schema({
     _id: {type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId},
-    type: String
+    type: {type: String, unique: true, require: true}
 }, {
     timestamps: true
 })
@@ -21,7 +21,7 @@ const IType = mongoose.Schema({
 const IUser = mongoose.Schema({
     _id: {type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId},
     name: {type: String, require: true},
-    username: {type: String, require: true},
+    username: {type: String, require: true, unique: true},
     password: {type: String, require: true},
     refreshToken: {type: String}
 }, {
@@ -33,9 +33,11 @@ const IOrder = mongoose.Schema({
     nameUser: {type: String, require: true},
     address: {type: String, require: true},
     phone: {type: String, require: true},
-    name: {type: String, require: true},
-    quantity: {type: Number, require: true},
-    cost: {type: Number, require: true},
+    goods: [{
+        name: {type: String, require: true},
+        quantity: {type: Number, require: true},
+        cost: {type: Number, require: true}
+    }],
     total: {type: Number, require: true},
     success: {type: Boolean, default: false},
     dateOrder: Date
