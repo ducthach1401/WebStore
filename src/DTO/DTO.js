@@ -12,6 +12,12 @@ module.exports.addItemSchema = Joi.object({
     type: Joi.string().required()
 });
 
+module.exports.updateItemSchema = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    cost: Joi.number().required().min(1),
+});
+
 module.exports.addTypeSchema = Joi.object({
     type: Joi.string().required()
 });
@@ -34,3 +40,4 @@ module.exports.addOrderSchema = Joi.object({
 module.exports.updateNameSchema = Joi.object({
     name: Joi.string().required().min(3)
 });
+

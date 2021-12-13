@@ -121,7 +121,14 @@ module.exports.updateType = async (filter, data) => {
 module.exports.deleteItem = async (filter) => {
     try {
         const result = await Item.deleteOne(filter);
-        return result;
+        if (result.n == 0) {
+            return {
+                message: 'Not found'
+            }
+        }
+        return {
+            message: 'Success'
+        }
     } catch (error) {
         throw error;
     }
@@ -130,7 +137,14 @@ module.exports.deleteItem = async (filter) => {
 module.exports.deleteType = async (filter) => {
     try {
         const result = await Type.deleteOne(filter);
-        return result;
+        if (result.n == 0) {
+            return {
+                message: 'Not found'
+            }
+        }
+        return {
+            message: 'Success'
+        }
     } catch (error) {
         throw error;
     }

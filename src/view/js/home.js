@@ -26,6 +26,7 @@ async function buttonLogin() {
         temp += '<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark fs-6" aria-labelledby="navbarDropdown">'
         temp += '<li><span class="dropdown-item" onclick="changeName()">Change Name</span></li>'
         temp += '<li><span class="dropdown-item" onclick="changePassword()">Change Password</span></li>'
+        temp += '<li><span class="dropdown-item" onclick="admin()">Admin</span></li>'
         temp += '<li><hr class="dropdown-divider"></li>'
         temp += '<li><span class="dropdown-item" onclick="logout()">Logout</span></li></ul>'
         document.getElementById("loginButton").innerHTML = temp;
@@ -56,9 +57,8 @@ async function getGoods() {
                 row.classList = 'row justify-content-center';
                 document.getElementById('goods').appendChild(row);
             }
-            console.log(item);
             count ++;
-            let temp = '<div class="card mr-3" style="width:300px">';
+            let temp = '<div class="card mr-3" style="width:300px" id="{}">'.replace('{}', item._id);
             temp += '<img class="card-img-top" src="{}" alt="Card image">'.replace('{}', item.image);
             temp += '<div class="card-body">'
             temp +=            '<h5 class="card-title"><b>{}</b></h5>'.replace('{}', item.name)

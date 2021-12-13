@@ -76,7 +76,7 @@ module.exports.deleteItem = async (req, res) => {
     const filter = {
         _id: req.params.id
     }
-    const result = await service.deleteItem(filter, data);
+    const result = await service.deleteItem(filter);
     res.json(result);
 }
 
@@ -84,7 +84,7 @@ module.exports.deleteType = async (req, res) => {
     const filter = {
         _id: req.params.id
     }
-    const result = await service.deleteType(filter, data);
+    const result = await service.deleteType(filter);
     res.json(result);
 }
 

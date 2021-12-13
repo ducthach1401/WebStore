@@ -46,4 +46,13 @@ router.get('/name', function(req, res) {
         res.sendFile(path.resolve(dirHtml + '/changeName.html'));
     }
 });
+
+router.get('/admin', function(req, res) {
+    if (!req.cookies.access_token) {
+        res.redirect('/');
+    }
+    else {
+        res.sendFile(path.resolve(dirHtml + '/admin.html'));
+    }
+});
 module.exports = router;
