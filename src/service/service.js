@@ -357,10 +357,10 @@ module.exports.getName = async (username) => {
     }
 }
 
-const sendTextMessage = (userId, text) => {
+const sendTextMessage = async (userId, text) => {
     try {
-        const callAPI = fetch(
-            `https://graph.facebook.com/v2.6/me/messages?access_token=${process.env.FACEBOOK_ACCESS_TOKEN}`,
+        const callAPI = await fetch(
+            `https://graph.facebook.com/v12.0/me/messages?access_token=${process.env.FACEBOOK_ACCESS_TOKEN}`,
             {
               headers: {
                 'Content-Type': 'application/json',
@@ -372,7 +372,7 @@ const sendTextMessage = (userId, text) => {
                   id: userId,
                 },
                 message: {
-                  text
+                  text: text
                 },
               }),
             }
