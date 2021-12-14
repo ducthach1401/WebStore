@@ -6,6 +6,8 @@ const Item = Model.Item;
 const User = Model.User;
 const Order = Model.Order;
 const cloudinary = require('cloudinary').v2;
+const fetch = require('node-fetch');
+require('dotenv').config();
 
 module.exports.getItemAll = async () => {
     try {
@@ -70,19 +72,40 @@ module.exports.addItem = async (data, image) => {
             }
         }
         const item = new Item(data);
-        await item.save();
         const timestamp = Math.round(Date.now() /1000);
         const temp = cloudinary.utils.api_sign_request(timestamp, process.env.API_SECRET);
-        const upload = cloudinary.uploader.upload(image.path, {public_id: item._id , folder: "store"}, (err) => {
+        const url = item._id + '/' +new Date().getTime();
+        const upload = cloudinary.uploader.upload(image.path, {public_id: url , folder: "store"}, (err) => {
             if (err) {
                 throw err;
             }
         });
+        const urlLink = cloudinary.url('store/' + url);
+        item.link = urlLink;
+        await item.save();
         return {
             message: 'Success'
         }
     } catch (error) {
         throw error;
+    }
+}
+
+module.exports.updateImage = async (filter, image) => {
+    const timestamp = Math.round(Date.now() /1000);
+    const temp = cloudinary.utils.api_sign_request(timestamp, process.env.API_SECRET);
+    const url = filter._id + '/' +new Date().getTime();
+    const upload = cloudinary.uploader.upload(image.path, {public_id:  url, folder: "store"}, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+    const item = await Item.findOne(filter);
+    const urlLink = cloudinary.url('store/' + url);
+    item.link = urlLink;
+    await item.save();
+    return {
+        message: 'Success'
     }
 }
 
@@ -333,3 +356,33 @@ module.exports.getName = async (username) => {
         throw error;
     }
 }
+
+const sendTextMessage = (userId, text) => {
+    try {
+        const callAPI = fetch(
+            `https://graph.facebook.com/v2.6/me/messages?access_token=${process.env.FACEBOOK_ACCESS_TOKEN}`,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              method: 'POST',
+              body: JSON.stringify({
+                messaging_type: 'RESPONSE',
+                recipient: {
+                  id: userId,
+                },
+                message: {
+                  text
+                },
+              }),
+            }
+        );
+        return {
+            message: 'Success'
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+sendTextMessage('100014757166607', 'rest');

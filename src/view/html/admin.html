@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Cache-control" content="no-store"> -->
     <link rel="stylesheet" href="../css/admin.css">
     <script src="../js/env.js"></script>
     <script src="../js/admin.js"></script>
@@ -24,8 +25,17 @@
           <div class="dropdown" id="loginButton"> </div>
         </nav>
     </div>
-    <div class="container" id = "goods">
-      
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <button class="btn btn-outline-dark" onclick="showItem()">Thêm sản phẩm</button>
+          <button class="btn btn-outline-dark" onclick="showTypeForm()">Thêm loại hàng</button>
+          <button class="btn btn-outline-dark" onclick="showDelete()">Xóa loại hàng</button>
+        </div>
+        <div class="col"  id = "goods">
+  
+        </div>
+      </div>
     </div>
     <script>
       buttonLogin();
@@ -33,7 +43,7 @@
     </script>
     <!-- Modal -->
     <div id="repair" class="modal fade" role="dialog">
-      <div class="modal-dialog text-center">
+      <div class="modal-dialog">
     
         <!-- Modal content-->
         <div class="modal-content">
@@ -48,7 +58,10 @@
             <input type="text" name="name" id="namesp"> <br>
 
             <label for="desc">Mô tả: </label>
-            <input type="text" name="desc" id="desc"> <br> 
+            <textarea name="desc" id="desc" cols="30" rows="5"></textarea> <br>
+            <!-- <input type="text" name="desc" id="desc"> <br>  -->
+            <label for="typeR">Loại hàng: </label>
+            <select name="typeR" id="typeR"></select> <br>
 
             <label for="price">Giá tiền: </label>
             <input type="text" name="price" id="price"> <br>
@@ -59,7 +72,102 @@
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div id="updateImage" class="modal fade" role="dialog">
+      <div class="modal-dialog">
     
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Sửa hình ảnh</h4>
+          </div>
+          <div class="modal-body">
+            <label for="idUpdate">ID: </label>
+            <input type="text" name="idUpdate" id="idUpdate" disabled> <br>
+
+            <label for="imageUpdate">Image: </label>
+            <input type="file" name="image" id="imageUpdate"> <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-info" onclick="updateImage()">Submit</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="additem" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm loại hàng</h4>
+          </div>
+          <div class="modal-body">
+            <label for="addName">Tên: </label>
+            <input type="text" name="addName" id="addName"> <br>
+
+            <label for="addDesc">Mô tả: </label>
+            <textarea name="addDesc" id="addDesc" cols="30" rows="5"></textarea> <br>
+            <!-- <input type="text" name="addDesc" id="addDesc"> <br>  -->
+            <label for="addType">Giá tiền: </label>
+            <select name="addType" id="addType">
+
+            </select> <br>
+
+            <label for="addPrice">Giá tiền: </label>
+            <input type="text" name="addPrice" id="addPrice"> <br>
+
+            <label for="addImage">Image: </label>
+            <input type="file" name="addImage" id="addImage"> <br>
+            <!-- <label for="image"></label> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-info" onclick="addItem()">Submit</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="showType" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm loại hàng</h4>
+          </div>
+          <div class="modal-body">
+            <label for="typeData">Loại hàng: </label>
+            <input type="text" name="typeData" id="typeData"> <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-info" onclick="addType()">Submit</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="deleteType" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content text-center">
+          <div class="modal-header">
+            <h4 class="modal-title">Sửa hình ảnh</h4>
+          </div>
+          <div class="modal-body" id="delete">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
 </body>

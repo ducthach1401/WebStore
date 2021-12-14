@@ -39,7 +39,45 @@ label {
     width: 100px;
 }
 
-#decr {
-    height: 50px;
+
+#desc {
+    /* height: 50px; */
+    width: 188px;
 }
 
+.data {
+    margin-bottom: 10px;
+}
+
+.card-body a {
+    margin-left: 10px;
+}
+
+.col-2 button {
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+#additem input, #addDesc, #desc, #repair input {
+    width: 300px;
+}
+
+.modal-body {
+    margin-left: 20px;
+}
+
+#addType, #typeR {
+    width: 150px;
+    height: 30px;
+}
+
+#delete div {
+    width: 150px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+#delete button {
+    width: 150px;
+    margin-bottom: 5px;
+}

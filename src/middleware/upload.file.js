@@ -4,7 +4,7 @@ module.exports.uploadFile = () => {
   return multer({
     storage: multer.diskStorage({}),
     fileFilter: (req, file, cb) => {
-      let ext = path.extname(file.originalname);  
+      let ext = path.extname(file.originalname); 
       file.tail=ext.substr(1);
       if (file.fieldname == "image") {
         file.resource_type="image";

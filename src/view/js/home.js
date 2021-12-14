@@ -49,6 +49,7 @@ async function getGoods() {
     });
     let data = await response.json();
     if (data.message == 'Success') {
+        document.getElementById('goods').innerHTML = '';
         let count = 0;
         let row;
         for (let item of data.result){
@@ -58,16 +59,105 @@ async function getGoods() {
                 document.getElementById('goods').appendChild(row);
             }
             count ++;
-            let temp = '<div class="card mr-3" style="width:300px" id="{}">'.replace('{}', item._id);
-            temp += '<img class="card-img-top" src="{}" alt="Card image">'.replace('{}', item.image);
+            let temp = '<div class="card mr-3 data" style="width:300px" id="{}">'.replace('{}', item._id);
+            temp += '<img class="card-img-top" src="{}" alt="Card image"  style="height:200px">'.replace('{}', item.image);
             temp += '<div class="card-body">'
             temp +=            '<h5 class="card-title"><b>{}</b></h5>'.replace('{}', item.name)
             temp +=           '<p class="card-text">Mô tả: {}</p>'.replace('{}', item.description)
-            temp +=            '<p class="card-text">Giá tiền: {} </p>'.replace('{}', item.cost)
+            temp +=            '<p class="card-text">Giá tiền: {} </p>'.replace('{}', item.cost.toLocaleString('vi-vn'))
             temp +=            '<div><a href="#" class="btn btn-outline-info float-right">Đặt hàng</a></div>'
             temp +=          '</div>'
             temp +=       '</div>'
             row.innerHTML += temp;
         }
+    }
+}
+
+async function showType () {
+    const url = API_URL + '/v1/type/';
+    const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    let data = await response.json();
+    let result = [];
+    if (data.message == 'Success') {
+        for (let type of data.result){
+            result.push(type.type);
+        }
+    }
+    return result;
+}
+
+async function filterType() {
+    const type = await showType();
+    const form = document.createElement('div');
+    form.setAttribute('class', 'form-check');
+    let count = 0;
+    form.innerHTML = '<input class="form-check-input" type="radio" name="filter" id="all" onchange="getGoods();" >';
+    form.innerHTML += '<label class="form-check-label" for="all">Tất cả</label> <br>';
+    for (let i of type){
+        count++;
+        form.innerHTML += '<input class="form-check-input" type="radio" name="filter" id="{}" onchange="filter(this.value);" value="[]">'.replace('{}', 'filter' + count).replace('[]', i);
+        form.innerHTML += '<label class="form-check-label" for="{}">'.replace('{}', 'filter' + count) + i +'</label> <br>';
+    }
+    document.getElementById('select').append(form);
+}
+
+
+async function filter (value) {
+    const url = API_URL + '/v1/item?type=' + value;
+    const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    let data = await response.json();
+    if (data.message == 'Success') {
+        document.getElementById('goods').innerHTML = '';
+        let count = 0;
+        let row;
+        for (let item of data.result){
+            if (count == 0){
+                row = document.createElement('div');
+                row.classList = 'row justify-content-center';
+                document.getElementById('goods').appendChild(row);
+            }
+            count ++;
+            let temp = '<div class="card mr-3 data" style="width:300px" id="{}">'.replace('{}', item._id);
+            temp += '<img class="card-img-top" src="{}" alt="Card image"  style="height:200px">'.replace('{}', item.image);
+            temp += '<div class="card-body">'
+            temp +=            '<h5 class="card-title"><b>{}</b></h5>'.replace('{}', item.name)
+            temp +=           '<p class="card-text">Mô tả: {}</p>'.replace('{}', item.description)
+            temp +=            '<p class="card-text">Giá tiền: {} </p>'.replace('{}', item.cost.toLocaleString('vi-vn'))
+            temp +=            '<div><a href="#" class="btn btn-outline-info float-right">Đặt hàng</a></div>'
+            temp +=          '</div>'
+            temp +=       '</div>'
+            row.innerHTML += temp;
+        }
+    }
+}
+
+function searchName() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("goods");
+    tr = table.getElementsByClassName("card mr-3 data");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("b")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }       
     }
 }

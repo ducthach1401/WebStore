@@ -13,6 +13,9 @@ route.route('/item')
     .get(controller.getItems)
     .post(authenUser,uploadFile().single('image'),validBody(addItemSchema),controller.addItem);
 
+route.route('/image/:id')
+    .post(authenUser, uploadFile().single('image'), controller.updateImage);
+
 route.route('/item/:id')
     .put(authenUser, validBody(updateItemSchema), controller.updateItem)
     .delete(authenUser, controller.deleteItem)
@@ -25,7 +28,7 @@ route.route('/type')
 route.route('/type/:id')
     .all(authenUser)
     .put(validBody(addTypeSchema),controller.updateType)
-    .delete(controller.deleteItem);
+    .delete(controller.deleteType);
 
 // route.route('/register')
 //     .post(controller.createUser);
@@ -56,5 +59,7 @@ route.route('/order/:id')
 
 route.route('/orders')
     .get(authenUser, controller.getAllOrders);
-    
+
+route.get('/webhook', controller.verifyWebhook);
+
 module.exports = route;

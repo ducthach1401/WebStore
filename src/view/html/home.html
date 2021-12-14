@@ -24,8 +24,28 @@
           <div class="dropdown" id="loginButton"> </div>
         </nav>
     </div>
-    <div class="container" id = "goods">
-      
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <div class="row">
+            <h5 class="mt-2">Bộ lọc tìm kiếm</h5>
+          </div>
+          <div class="row" id="select">
+            
+          </div>
+        </div>
+        <div class="col" >
+          <div class="row">
+            <form class="d-flex w-50 mb-3 float-end" onsubmit="return false;" id="form-search">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search" onkeyup="searchName()" id="search">
+              <img src="../image/search.png" id="input-img">
+            </form>
+          </div>
+          <div class="row" id = "goods">
+
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer">
       <h4><b>Cám ơn quý khách đã ghé thăm</b></h4>
@@ -34,6 +54,26 @@
     <script>
       buttonLogin();
       getGoods();
+      filterType();
     </script>
+
+<div id="order" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h4 class="modal-title">Sửa hình ảnh</h4>
+      </div>
+      <div class="modal-body" id="delete">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

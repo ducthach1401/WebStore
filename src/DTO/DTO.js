@@ -16,6 +16,7 @@ module.exports.updateItemSchema = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().required(),
     cost: Joi.number().required().min(1),
+    type: Joi.string().required()
 });
 
 module.exports.addTypeSchema = Joi.object({

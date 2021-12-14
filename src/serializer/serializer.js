@@ -5,7 +5,7 @@ module.exports.modelItem = (model) => {
         description: model.description,
         cost: model.cost,
         type: model.type,
-        image: "https://res.cloudinary.com/store241200/image/upload/v1/store/" + model._id
+        image: model.link
     }
 }
 

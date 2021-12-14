@@ -189,3 +189,25 @@ module.exports.uncheckOrder = async (req, res) => {
     const result = await service.uncheckOrder(filter);
     res.json(result)
 }
+
+module.exports.updateImage = async (req, res) => {
+    const filter = {
+        _id: req.params.id
+    }
+    const file = req.file;
+    const result = await service.updateImage(filter, file);
+    res.json(result)
+}
+
+module.exports.verifyWebhook = (req, res) => {
+    let VERIFY_TOKEN = '123456789';
+    let mode = req.query['hub.mode'];
+    let token = req.query['hub.verify_token'];
+    let challenge = req.query['hub.challenge'];
+
+    if (mode && token === VERIFY_TOKEN) {
+      res.status(200).send(challenge);
+    } else {
+        res.sendStatus(403);
+    }
+};
