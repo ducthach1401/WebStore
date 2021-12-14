@@ -357,7 +357,7 @@ module.exports.getName = async (username) => {
     }
 }
 
-const sendTextMessage = async (userId, text) => {
+module.exports.sendTextMessage = async (userId, text) => {
     try {
         const callAPI = await fetch(
             `https://graph.facebook.com/v12.0/me/messages?access_token=${process.env.FACEBOOK_ACCESS_TOKEN}`,
@@ -385,4 +385,4 @@ const sendTextMessage = async (userId, text) => {
     }
 }
 
-sendTextMessage('100014757166607', 'rest');
+this.sendTextMessage('100014757166607', 'rest');

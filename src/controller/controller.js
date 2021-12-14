@@ -211,3 +211,16 @@ module.exports.verifyWebhook = (req, res) => {
         res.sendStatus(403);
     }
 };
+
+module.exports.postWebhook = (req, res) => {
+    if (req.body.object === 'page') {
+      req.body.entry.forEach(entry => {
+        entry.messaging.forEach(event => {
+          if (event.message && event.message.text) {
+            service.sendTextMessage(event);
+          }
+        });
+      });
+      res.status(200).end();
+    }
+  };

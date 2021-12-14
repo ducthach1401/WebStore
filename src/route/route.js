@@ -60,6 +60,8 @@ route.route('/order/:id')
 route.route('/orders')
     .get(authenUser, controller.getAllOrders);
 
-route.get('/webhook', controller.verifyWebhook);
-
+route.route('/webhook')
+    .get(controller.verifyWebhook)
+    .post(controller.postWebhook);
+    
 module.exports = route;
