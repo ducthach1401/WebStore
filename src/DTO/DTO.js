@@ -42,3 +42,17 @@ module.exports.updateNameSchema = Joi.object({
     name: Joi.string().required().min(3)
 });
 
+module.exports.orderSchema = Joi.object({
+    name: Joi.string().required(),
+    sdt: Joi.string().required(),
+    address: Joi.string().required(),
+    facebook: Joi.string(),
+    goods: Joi.array().items(Joi.object({
+        stt: Joi.number().min(1),
+        name: Joi.string().required(),
+        quantity: Joi.number().min(1).required(),
+        price: Joi.string().required().min(1),
+        total: Joi.string().required().min(1)
+    })).required(),
+    totalPrice: Joi.string().required()
+})

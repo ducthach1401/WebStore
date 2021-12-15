@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const IItem = mongoose.Schema({
     _id: {type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId},
-    name: {type: String, require: true},
+    name: {type: String, require: true, unique: true},
     description: {type: String},
     cost: {type: Number, require: true},
     type: {type: String, require: true},

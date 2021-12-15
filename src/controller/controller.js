@@ -225,3 +225,9 @@ module.exports.postWebhook = (req, res) => {
         res.status(200).end();
     }
 }
+
+module.exports.sendOrder = async (req, res) => {
+    const data = req.body;
+    const result = await service.sendOrder(data);
+    res.json(result);
+}

@@ -76,3 +76,22 @@ input::placeholder {
 .col-2 {
     min-height: 815px !important;
 }
+
+#orderData label {
+    width: 150px;
+}
+
+
+#orderData input, #orderData textarea {
+    width: 250px;
+}
+
+#orderData{
+    margin-left: 20px;
+}
+
+table, td, th {
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding: 10px;
+}

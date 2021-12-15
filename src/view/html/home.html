@@ -27,6 +27,10 @@
     <div class="container">
       <div class="row">
         <div class="col-2">
+          <div class="row mb-2">
+            <button class="btn btn-outline-dark btn-lg" onclick="cart()" >Giỏ hàng</button>
+          </div>
+
           <div class="row">
             <h5 class="mt-2">Bộ lọc tìm kiếm</h5>
           </div>
@@ -61,15 +65,34 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content text-center">
+    <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Sửa hình ảnh</h4>
+        <h4 class="modal-title">Đặt hàng</h4>
       </div>
-      <div class="modal-body" id="delete">
-        
+      <div class="modal-body" id="orderData">
+        <label for="name">Họ tên <span style="color: red;">*</span>: </label>
+        <input type="text" id="name" name="name"> <br>
+
+        <label for="sdt">SĐT<span style="color: red;">*</span>: </label>
+        <input type="text" id="sdt" name="sdt"> <br>
+
+        <label for="address">Địa chỉ<span style="color: red;">*</span>: </label>
+        <textarea name="address" id="address" cols="20" rows="2"></textarea> <br>
+
+        <p>Sản phẩm:</p>
+        <div>
+          <table id="ordersp">
+          </table>
+        </div>
+        <p class="mt-2">Tổng cộng: <span id="tt"></span></p>
+        <label for="fb">Link FB (Nếu có): </label>
+        <input type="text" id="fb" name="fb"> <br>
+        <p>Ghi chú: <span style="color: red;">* Bắt buộc</span></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <p id="noti" style="color: red;"></p>
+        <button type="button" class="btn btn-outline-primary" onclick="submitCart()">Xác nhận</button>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>
