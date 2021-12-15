@@ -57,7 +57,7 @@ module.exports.addType = async (data) => {
             message: 'Success'
         }
     } catch (error) {
-        
+
     }
 }
 
@@ -66,16 +66,16 @@ module.exports.addItem = async (data, image) => {
         const check = await Type.find({
             type: data.type
         });
-        if (!check){
+        if (!check) {
             return {
                 message: 'Not found type of item'
             }
         }
         const item = new Item(data);
-        const timestamp = Math.round(Date.now() /1000);
+        const timestamp = Math.round(Date.now() / 1000);
         const temp = cloudinary.utils.api_sign_request(timestamp, process.env.API_SECRET);
-        const url = item._id + '/' +new Date().getTime();
-        const upload = cloudinary.uploader.upload(image.path, {public_id: url , folder: "store"}, (err) => {
+        const url = item._id + '/' + new Date().getTime();
+        const upload = cloudinary.uploader.upload(image.path, { public_id: url, folder: "store" }, (err) => {
             if (err) {
                 throw err;
             }
@@ -92,10 +92,10 @@ module.exports.addItem = async (data, image) => {
 }
 
 module.exports.updateImage = async (filter, image) => {
-    const timestamp = Math.round(Date.now() /1000);
+    const timestamp = Math.round(Date.now() / 1000);
     const temp = cloudinary.utils.api_sign_request(timestamp, process.env.API_SECRET);
-    const url = filter._id + '/' +new Date().getTime();
-    const upload = cloudinary.uploader.upload(image.path, {public_id:  url, folder: "store"}, (err) => {
+    const url = filter._id + '/' + new Date().getTime();
+    const upload = cloudinary.uploader.upload(image.path, { public_id: url, folder: "store" }, (err) => {
         if (err) {
             throw err;
         }
@@ -198,7 +198,7 @@ module.exports.updateUser = async (filter, data) => {
     }
 }
 
-module.exports.updateUserName  = async (filter, data) => {
+module.exports.updateUserName = async (filter, data) => {
     try {
         const result = await User.updateOne(filter, data);
         return {
@@ -209,22 +209,22 @@ module.exports.updateUserName  = async (filter, data) => {
     }
 }
 
-module.exports.login = async(data) =>{
+module.exports.login = async (data) => {
     try {
-        const user = await User.findOne({username: data.username})
-        if (!user){
+        const user = await User.findOne({ username: data.username })
+        if (!user) {
             return {
                 message: "User wrong"
             }
         }
         const result = bcrypt.compareSync(data.password, user.password);
-        if (result){
+        if (result) {
             const payload = {
                 _id: user._id,
                 name: user.name,
                 username: user.username,
             }
-            const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '6h'});
+            const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '6h' });
             const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
             user.refreshToken = refreshToken;
             user.save();
@@ -239,13 +239,13 @@ module.exports.login = async(data) =>{
             }
         }
     } catch (error) {
-        throw error;   
+        throw error;
     }
 }
 
 module.exports.regenerateAccessToken = async (refreshToken) => {
     try {
-        const user = await User.findOne({refreshToken: refreshToken});
+        const user = await User.findOne({ refreshToken: refreshToken });
         if (user) {
             const payload = {
                 _id: user._id,
@@ -253,7 +253,7 @@ module.exports.regenerateAccessToken = async (refreshToken) => {
                 roleUser: user.roleUser
             }
             const userRefresh = await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-            const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '6h'});
+            const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '6h' });
             return {
                 accessToken: accessToken
             }
@@ -307,7 +307,7 @@ module.exports.checkOrder = async (filter) => {
         const result = await Order.updateOne(filter, {
             success: true
         });
-        if (result.n == 0){
+        if (result.n == 0) {
             return {
                 message: "Not found"
             }
@@ -325,7 +325,7 @@ module.exports.uncheckOrder = async (filter) => {
         const result = await Order.updateOne(filter, {
             success: false
         });
-        if (result.n == 0){
+        if (result.n == 0) {
             return {
                 message: "Not found"
             }
@@ -341,7 +341,7 @@ module.exports.uncheckOrder = async (filter) => {
 module.exports.getName = async (username) => {
     try {
         const result = await User.findOne(username);
-        if (!result){
+        if (!result) {
             return {
                 message: "Not Found"
             }
@@ -357,32 +357,11 @@ module.exports.getName = async (username) => {
     }
 }
 
-module.exports.sendTextMessage = async (userId, text) => {
+
+async function sendMessage() {
     try {
-        const callAPI = await fetch(
-            `https://graph.facebook.com/v12.0/me/messages?access_token=${process.env.FACEBOOK_ACCESS_TOKEN}`,
-            {
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              method: 'POST',
-              body: JSON.stringify({
-                messaging_type: 'RESPONSE',
-                recipient: {
-                  id: userId,
-                },
-                message: {
-                  text: text
-                },
-              }),
-            }
-        );
-        return {
-            message: 'Success'
-        }
+ 
     } catch (error) {
         throw error;
     }
 }
-
-this.sendTextMessage('100014757166607', 'rest');

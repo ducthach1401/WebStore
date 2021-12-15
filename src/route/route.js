@@ -41,6 +41,7 @@ route.route('/refresh')
 
 route.route('/user')
     .get(authenUser, controller.getName);
+
 route.route('/user/password')
     .post(authenUser, validBody(passwordSchema) ,controller.updateUser);
 
@@ -60,8 +61,8 @@ route.route('/order/:id')
 route.route('/orders')
     .get(authenUser, controller.getAllOrders);
 
-route.route('/webhook')
-    .get(controller.verifyWebhook)
-    .post(controller.postWebhook);
+// route.route('/webhook')
+//     .get(controller.verifyWebhook)
+//     .post(controller.postWebhook);
     
 module.exports = route;
