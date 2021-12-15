@@ -49,8 +49,7 @@ route.route('/user/name')
     .post(authenUser, validBody(updateNameSchema) ,controller.updateUserName);
 
 route.route('/order')
-    .all(authenUser)
-    .get(controller.getOrders)
+    .get(authenUser,controller.getOrders)
     .post(validBody(orderSchema),controller.sendOrder);
 
 route.route('/order/:id')

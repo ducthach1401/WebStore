@@ -406,27 +406,3 @@ module.exports.sendOrder = async (data) => {
         throw error;
     }
 }
-
-this.sendOrder({
-    "name": "Anh Em Kao Hip Hop",
-    "sdt": "111111",
-    "address": "111",
-    "facebook": "",
-    "goods": [
-        {
-            "stt": 1,
-            "name": "thach",
-            "quantity": 2,
-            "price": "11.111",
-            "total": "22.222"
-        },
-        {
-            "stt": 2,
-            "name": "test",
-            "quantity": 4,
-            "price": "10.000",
-            "total": "40.000"
-        }
-    ],
-    "totalPrice": "62.222"
-});
