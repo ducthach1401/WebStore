@@ -60,7 +60,7 @@ async function getGoods() {
             }
             count ++;
             let temp = '<div class="card mr-3 data" style="width:300px">'
-            temp += '<img class="card-img-top" src="{}" alt="Card image"  style="height:200px">'.replace('{}', item.image);
+            temp += '<img class="card-img-top" src="{}" alt="Card image"  style="height:200px; cursor: pointer ;" onclick="window.open(this.src)">'.replace('{}', item.image);
             temp += '<div class="card-body">'
             temp +=            '<h5 class="card-title"><b>{}</b></h5>'.replace('{}', item.name)
             temp +=           '<p class="card-text">Mô tả: {}</p>'.replace('{}', item.description)
