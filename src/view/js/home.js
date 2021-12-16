@@ -284,7 +284,7 @@ async function total (number_id) {
 
 async function submitCart() {
     let data = {
-        name: document.getElementById('name').value,
+        name: document.getElementById('namepp').value,
         sdt: document.getElementById('sdt').value,
         address: document.getElementById('address').value,
         facebook: document.getElementById('fb').value,
