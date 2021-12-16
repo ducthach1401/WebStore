@@ -47,6 +47,7 @@ module.exports.orderSchema = Joi.object({
     sdt: Joi.string().required(),
     address: Joi.string().required(),
     facebook: Joi.string(),
+    note: Joi.string(),
     goods: Joi.array().items(Joi.object({
         stt: Joi.number().min(1),
         name: Joi.string().required(),

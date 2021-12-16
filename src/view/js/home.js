@@ -275,6 +275,7 @@ async function submitCart() {
         sdt: document.getElementById('sdt').value,
         address: document.getElementById('address').value,
         facebook: document.getElementById('fb').value,
+        note: document.getElementById('note').value
     };
     const noti = document.getElementById('noti');
     noti.innerHTML = '';
@@ -291,6 +292,14 @@ async function submitCart() {
     if (data.address.length <= 0) {
         noti.innerHTML = 'Bạn chưa điền địa chỉ!!';
         return;
+    }
+
+    if (data.facebook.length <= 0) {
+        delete data.facebook;
+    }
+
+    if (data.note.length <= 0) {
+        delete data.note;
     }
 
     let stt = 0;

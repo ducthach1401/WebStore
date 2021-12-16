@@ -393,12 +393,19 @@ module.exports.sendOrder = async (data) => {
         text += 'Tên người đặt: ' + data.name + '\n';
         text += 'SDT: ' + data.sdt + '\n';
         text += 'Địa chỉ: ' + data.address + '\n';
-        text += 'Facebook: ' + data.facebook + '\n \n';
+        if (data.facebook){
+            text += 'Facebook: ' + data.facebook + '\n \n';
+        }
+        if (data.note) {
+            text += 'Ghi chú: ' + data.facebook + '\n \n';
+        }
+
         for (let item of data.goods){
             text += `${item.stt}. ${item.name}, Số lượng:  ${item.quantity}, Đơn giá: ${item.price}, Thành tiền: ${item.total}\n`
         }
         text += `\n Tổng tiền (Nhớ check lại nha): ${data.totalPrice}`
-        await this.sendTextMessage("4620316828015903", text);
+        const result = await this.sendTextMessage("4620316828015903", text);
+        console.log(result);
         return {
             message: 'Success'
         }
