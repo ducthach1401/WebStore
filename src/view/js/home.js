@@ -243,17 +243,30 @@ async function cart() {
         td = document.createElement('td');
         td.innerText = (data.price * data.quantity).toLocaleString('vi-vn');
         row.append(td);
+
+        td = document.createElement('td');
+        td.innerHTML = '<button class="btn btn-outline-danger" onclick="deleteItem(this.value);" value="{}">Xóa</button>'.replace('{}', item);
+        row.append(td);
         bodyOrder.appendChild(row);
         sum += data.price * data.quantity;
     }
     if (stt == 0){
         Swal.fire({
-            title: "Bạn chưa có gì trong giỏ nha! :("
+            title: "Bạn chưa có gì trong giỏ nha!"
         })
         return;
     }
     document.getElementById('tt').innerText = sum.toLocaleString('vi-vn')
     $('#order').modal('show');
+}
+
+async function deleteItem(value) {
+    window.localStorage.removeItem(value);
+    if (window.localStorage.length == 0){
+        $('#order').modal('hide');
+        return;
+    }
+    await cart();
 }
 
 async function total (number_id) {

@@ -377,8 +377,15 @@ module.exports.sendTextMessage = async (userId, text) => {
               }),
             }
         );
-        return {
-            message: 'Success'
+        if (callAPI.status == 200){
+            return {
+                message: 'Success'
+            }
+        }
+        else {
+          return {
+            message: 'Failed'
+          }
         }
     } catch (error) {
         throw error;
@@ -389,7 +396,7 @@ module.exports.sendOrder = async (data) => {
     try {
         let text = '';
         const date = new Date();
-        text += [date.getDate(), date.getMonth(), date.getFullYear()].join('/') + ' ' + date.getHours() + ':' + date.getMinutes() + '\n';
+        text += [date.getDate(), date.getMonth(), date.getFullYear()].join('/') + ' ' + (date.getHours() + 7) + ':' + date.getMinutes() + '\n';
         text += 'Tên người đặt: ' + data.name + '\n';
         text += 'SDT: ' + data.sdt + '\n';
         text += 'Địa chỉ: ' + data.address + '\n';
@@ -404,11 +411,8 @@ module.exports.sendOrder = async (data) => {
             text += `${item.stt}. ${item.name}, Số lượng:  ${item.quantity}, Đơn giá: ${item.price}, Thành tiền: ${item.total}\n`
         }
         text += `\n Tổng tiền (Nhớ check lại nha): ${data.totalPrice}`
-        const result = await this.sendTextMessage("4620316828015903", text);
-        console.log(result);
-        return {
-            message: 'Success'
-        }
+        const result = await this.sendTextMessage(process.env.ID_FACEBOOK, text);
+        return result;
     } catch (error) {
         throw error;
     }

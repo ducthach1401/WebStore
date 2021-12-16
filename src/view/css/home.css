@@ -8,19 +8,6 @@
     margin-right: 20px;
 }
 
-#album {
-    /* width: 200px; */
-    height: 100px;
-    margin-top: 20px;
-    background-color: lightskyblue;
-    cursor: pointer;
-    user-select: none;
-}
-
-#album:hover {
-    background-color: gold;
-}
-
 .imageHome {
     width: 60px;
     height: 60px;
@@ -73,7 +60,7 @@ input::placeholder {
     font-size: 14px;
 }
 
-.col-2 {
+.col-lg-2 {
     min-height: 815px !important;
 }
 
@@ -94,4 +81,176 @@ table, td, th {
     border-collapse: collapse;
     border: 1px solid black;
     padding: 10px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+    #loginButton {
+        position: relative;
+        right: 10%;
+    }
+    .col-lg-2 {
+        min-height: 0px !important;
+    }
+    #loginButton {
+        position: relative;
+        right: 0%;
+    }
+
+    #loginButton ul {
+        position: absolute;
+        right: 0%;
+        left: auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #loginButton {
+        position: relative;
+        left: 2%;
+    }
+    .col-lg-2 {
+        min-height: 0px !important;
+    }
+
+    h2 {
+        font-size: large !important;
+    }
+
+    .row {
+        margin: auto;
+    }
+
+    #form-search {
+        position: relative;
+        left: 5%;
+        width: 85% !important;
+        margin-top: 5px;
+    }
+
+    .card {
+        width: 280px !important;
+    }
+
+    .row {
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+    }
+
+    .footer {
+        /* position: fixed;
+        bottom: 0px; */
+        height: 80px;
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+        margin-top: 10px;
+        margin-left: 0%;
+        margin-right: 0%;
+        background-color: gold ;
+    }
+    h4 {
+        font-size: medium !important;
+    }
+
+    .content {
+        padding: 0%;
+    }
+
+    #orderData label {
+        width: 80px;
+    }
+    
+    
+    #orderData input, #orderData textarea {
+        width: 200px;
+    }
+    
+    #orderData{
+        margin-left: 0px;
+    }
+    
+    table, td, th {
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+        font-size: small;
+    }
+}
+@media only screen and (max-width: 360px) {
+    #loginButton {
+        position: relative;
+        left: 60%;
+    }
+
+    h2 {
+        font-size: large !important;
+    }
+
+    .row {
+        margin: auto;
+    }
+
+    #form-search {
+        position: relative;
+        left: 5%;
+        width: 85% !important;
+        margin-top: 5px;
+    }
+
+    .card {
+        width: 280px !important;
+    }
+
+    .row {
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+    }
+
+    .footer {
+        /* position: fixed;
+        bottom: 0px; */
+        height: 80px;
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+        margin-top: 10px;
+        margin-left: 0%;
+        margin-right: 0%;
+        background-color: gold ;
+    }
+    h4 {
+        font-size: medium !important;
+    }
+
+    .content {
+        padding: 0%;
+    }
+
+    #orderData label {
+        width: 80px;
+    }
+    
+    
+    #orderData input, #orderData textarea {
+        width: 150px;
+    }
+    
+    #order{
+        margin-left: 0px;
+    }
+    
+    table, td, th {
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+        font-size: x-small;
+    }
+    .col-lg-2 {
+        min-height: 0px !important;
+    }
+
+    td button {
+        font-size: small;
+    }
 }

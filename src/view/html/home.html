@@ -24,10 +24,10 @@
           <div class="dropdown" id="loginButton"> </div>
         </nav>
     </div>
-    <div class="container">
+    <div class="container">  
       <div class="row">
-        <div class="col-2">
-          <div class="row mb-2">
+        <div class="col-12 col-lg-2 find">
+          <div class="row mb-2 cart">
             <button class="btn btn-outline-dark btn-lg" onclick="cart()" >Giỏ hàng</button>
           </div>
 
@@ -38,12 +38,13 @@
             
           </div>
         </div>
-        <div class="col" >
+        <div class="col-12 col-lg content" >
           <div class="row">
             <form class="d-flex w-50 mb-3 float-end" onsubmit="return false;" id="form-search">
               <input class="form-control" type="search" placeholder="Search" aria-label="Search" onkeyup="searchName()" id="search">
               <img src="../image/search.png" id="input-img">
             </form>
+            <p class="ml-4"><b>Lưu ý: không cần login để đặt hàng</b></p>
           </div>
           <div class="row" id = "goods">
 
@@ -81,7 +82,6 @@
 
         <label for="note">Ghi chú (nếu có): </label>
         <input type="text" id="note" name="note"> <br>
-
         <p>Sản phẩm:</p>
         <div>
           <table id="ordersp">
