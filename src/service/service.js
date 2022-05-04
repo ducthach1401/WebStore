@@ -402,29 +402,31 @@ module.exports.sendTextMessage = async (userId, text) => {
 
 module.exports.sendOrder = async (data) => {
   try {
-    let text = '';
+    let text = '<h2> Đơn xác nhận từ cửa hàng Three Group </h2>';
     const date = new Date();
+    text += '<h3> Tên người đặt: ' + data.name + '</h3>';
+    text += '<p> SDT: ' + data.sdt + '</p>';
+    text += '<p> Địa chỉ: ' + data.address + '</p>';
+    if (data.facebook) {
+      text += '<p> Facebook: ' + data.facebook + '</p>';
+    }
+    if (data.note) {
+      text += '<p> Ghi chú: ' + data.facebook + '</p>';
+    }
+
+    for (let item of data.goods) {
+      text += `<p> ${item.stt}. ${item.name}, Số lượng:  ${item.quantity}, Đơn giá: ${item.price}, Thành tiền: ${item.total} </p>`;
+    }
+    text += `<h3> Tổng tiền: ${data.totalPrice} </h3>`;
+    text += `<h3> Cảm ơn quý khách đã ủng hộ </h3>`;
     text +=
+      '<p>' +
       [date.getDate(), date.getMonth(), date.getFullYear()].join('/') +
       ' ' +
       (date.getHours() + 7) +
       ':' +
       date.getMinutes() +
-      '\n';
-    text += 'Tên người đặt: ' + data.name + '\n';
-    text += 'SDT: ' + data.sdt + '\n';
-    text += 'Địa chỉ: ' + data.address + '\n';
-    if (data.facebook) {
-      text += 'Facebook: ' + data.facebook + '\n \n';
-    }
-    if (data.note) {
-      text += 'Ghi chú: ' + data.facebook + '\n \n';
-    }
-
-    for (let item of data.goods) {
-      text += `${item.stt}. ${item.name}, Số lượng:  ${item.quantity}, Đơn giá: ${item.price}, Thành tiền: ${item.total}\n`;
-    }
-    text += `\n Tổng tiền: ${data.totalPrice}`;
+      '</p>';
     const result = await this.sendMailOrder(data.gmail, text);
     return {
       message: 'Success',
@@ -438,7 +440,7 @@ module.exports.sendMailOrder = async (gmail, text) => {
   await mail.sendMail({
     from: process.env.MAIL_ADDRESS,
     to: gmail,
-    subject: 'xác nhận Order từ Three Group',
-    text: text,
+    subject: 'Xác nhận Order từ Three Group',
+    html: text,
   });
 };
