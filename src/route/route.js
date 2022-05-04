@@ -30,8 +30,8 @@ route.route('/type/:id')
     .put(validBody(addTypeSchema),controller.updateType)
     .delete(controller.deleteType);
 
-// route.route('/register')
-//     .post(controller.createUser);
+route.route('/register')
+    .post(controller.createUser);
 
 route.route('/login')
     .post(controller.login);

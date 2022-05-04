@@ -1,258 +1,278 @@
-.header{
-    font-size: large;
-    /* width: 90%  ; */
-    margin: auto;
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+  background-color: #fef6f5 !important;
+}
+#filterArrange {
+  height: 35px;
+  float: right;
+  margin-left: auto;
+  margin-right: 20px;
+  width: 250px;
+}
+.header {
+  font-size: large;
+  /* width: 90%  ; */
+  margin: auto;
+  color: whitesmoke !important;
+  background-color: #d0011b !important;
 }
 
 .header svg {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .imageHome {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 #loginButton {
-    position: relative;
-    right: 50px;
+  position: relative;
+  right: 50px;
 }
 
 .buttonLogin {
-    width: 100px;
+  width: 100px;
 }
 
 .footer {
-    /* position: fixed;
+  /* position: fixed;
     bottom: 0px; */
+  height: 80px;
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+  margin-top: 10px;
+  background-color: #d0011b;
+  color: whitesmoke;
+}
+
+.data {
+  margin-bottom: 10px;
+}
+
+#form-search {
+  position: relative;
+}
+
+#search {
+  padding-left: 35px;
+}
+
+#input-img {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 25%;
+  left: 2%;
+}
+
+input::placeholder {
+  color: rgb(221, 221, 221);
+  opacity: 1;
+  font-size: 14px;
+}
+
+.col-lg-2 {
+  min-height: 815px !important;
+}
+
+#orderData label {
+  width: 150px;
+}
+
+#orderData input,
+#orderData textarea {
+  width: 250px;
+}
+
+#orderData {
+  margin-left: 20px;
+}
+
+#goods {
+  margin: auto;
+}
+table,
+td,
+th {
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+  #loginButton {
+    position: relative;
+    right: 10%;
+  }
+  .col-lg-2 {
+    min-height: 0px !important;
+  }
+  #loginButton {
+    position: relative;
+    right: 0%;
+  }
+
+  #loginButton ul {
+    position: absolute;
+    right: 0%;
+    left: auto;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #loginButton {
+    position: relative;
+    left: 2%;
+  }
+  .col-lg-2 {
+    min-height: 0px !important;
+  }
+
+  h2 {
+    font-size: large !important;
+  }
+
+  .row {
+    margin: auto;
+  }
+
+  #form-search {
+    position: relative;
+    left: 5%;
+    width: 85% !important;
+    margin-top: 5px;
+  }
+
+  .card {
+    width: 280px !important;
+  }
+
+  .row {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+  }
+
+  .footer {
+    /* position: fixed;
+        bottom: 0px; */
     height: 80px;
     width: 100%;
     text-align: center;
     padding-top: 10px;
     margin-top: 10px;
-    background-color: gold ;
-}
+    margin-left: 0%;
+    margin-right: 0%;
+    background-color: #d0011b;
+    color: whitesmoke;
+  }
+  h4 {
+    font-size: medium !important;
+  }
 
+  .content {
+    padding: 0%;
+  }
 
-.data {
-    margin-bottom: 10px;
-}
+  #orderData label {
+    width: 80px;
+  }
 
-#form-search {
-    position: relative;
-}
+  #orderData input,
+  #orderData textarea {
+    width: 200px;
+  }
 
-#search {
-    padding-left: 35px;
-}
+  #orderData {
+    margin-left: 0px;
+  }
 
-#input-img {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 25%;
-    left: 2%;
-}
-
-input::placeholder {
-    color: rgb(221, 221, 221);
-    opacity: 1;
-    font-size: 14px;
-}
-
-.col-lg-2 {
-    min-height: 815px !important;
-}
-
-#orderData label {
-    width: 150px;
-}
-
-
-#orderData input, #orderData textarea {
-    width: 250px;
-}
-
-#orderData{
-    margin-left: 20px;
-}
-
-#goods {
-    margin: auto;
-}
-table, td, th {
+  table,
+  td,
+  th {
     border-collapse: collapse;
     border: 1px solid black;
-    padding: 10px;
     text-align: center;
-}
-
-@media only screen and (max-width: 800px) {
-    #loginButton {
-        position: relative;
-        right: 10%;
-    }
-    .col-lg-2 {
-        min-height: 0px !important;
-    }
-    #loginButton {
-        position: relative;
-        right: 0%;
-    }
-
-    #loginButton ul {
-        position: absolute;
-        right: 0%;
-        left: auto;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    #loginButton {
-        position: relative;
-        left: 2%;
-    }
-    .col-lg-2 {
-        min-height: 0px !important;
-    }
-
-    h2 {
-        font-size: large !important;
-    }
-
-    .row {
-        margin: auto;
-    }
-
-    #form-search {
-        position: relative;
-        left: 5%;
-        width: 85% !important;
-        margin-top: 5px;
-    }
-
-    .card {
-        width: 280px !important;
-    }
-
-    .row {
-        margin-left: 0% !important;
-        margin-right: 0% !important;
-    }
-
-    .footer {
-        /* position: fixed;
-        bottom: 0px; */
-        height: 80px;
-        width: 100%;
-        text-align: center;
-        padding-top: 10px;
-        margin-top: 10px;
-        margin-left: 0%;
-        margin-right: 0%;
-        background-color: gold ;
-    }
-    h4 {
-        font-size: medium !important;
-    }
-
-    .content {
-        padding: 0%;
-    }
-
-    #orderData label {
-        width: 80px;
-    }
-    
-    
-    #orderData input, #orderData textarea {
-        width: 200px;
-    }
-    
-    #orderData{
-        margin-left: 0px;
-    }
-    
-    table, td, th {
-        border-collapse: collapse;
-        border: 1px solid black;
-        text-align: center;
-        font-size: small;
-    }
+    font-size: small;
+  }
 }
 
 @media only screen and (max-width: 360px) {
-    #loginButton {
-        position: relative;
-        left: 60%;
-    }
+  #loginButton {
+    position: relative;
+    left: 60%;
+  }
 
-    h2 {
-        font-size: large !important;
-    }
+  h2 {
+    font-size: large !important;
+  }
 
-    .row {
-        margin: auto;
-    }
+  .row {
+    margin: auto;
+  }
 
-    #form-search {
-        position: relative;
-        left: 5%;
-        width: 85% !important;
-        margin-top: 5px;
-    }
+  #form-search {
+    position: relative;
+    left: 5%;
+    width: 85% !important;
+    margin-top: 5px;
+  }
 
-    .card {
-        width: 280px !important;
-    }
+  .card {
+    width: 280px !important;
+  }
 
-    .row {
-        margin-left: 0% !important;
-        margin-right: 0% !important;
-    }
+  .row {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+  }
 
-    .footer {
-        height: 80px;
-        width: 100%;
-        text-align: center;
-        padding-top: 10px;
-        margin-top: 10px;
-        margin-left: 0%;
-        margin-right: 0%;
-        background-color: gold ;
-    }
-    h4 {
-        font-size: medium !important;
-    }
+  .footer {
+    height: 80px;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-left: 0%;
+    margin-right: 0%;
+    background-color: gold;
+  }
+  h4 {
+    font-size: medium !important;
+  }
 
-    .content {
-        padding: 0%;
-    }
+  .content {
+    padding: 0%;
+  }
 
-    #orderData label {
-        width: 80px;
-    }
-    
-    
-    #orderData input, #orderData textarea {
-        width: 150px;
-    }
-    
-    #order{
-        margin-left: 0px;
-    }
-    
-    table, td, th {
-        border-collapse: collapse;
-        border: 1px solid black;
-        text-align: center;
-        font-size: x-small;
-    }
-    .col-lg-2 {
-        min-height: 0px !important;
-    }
+  #orderData label {
+    width: 80px;
+  }
 
-    td button {
-        font-size: small;
-    }
+  #orderData input,
+  #orderData textarea {
+    width: 150px;
+  }
+
+  #order {
+    margin-left: 0px;
+  }
+
+  table,
+  td,
+  th {
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+    font-size: x-small;
+  }
+  .col-lg-2 {
+    min-height: 0px !important;
+  }
+
+  td button {
+    font-size: small;
+  }
 }

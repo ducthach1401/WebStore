@@ -1,60 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/home.css" />
     <script src="../js/env.js"></script>
     <script src="../js/home.js"></script>
-    <link rel="icon" href="../image/icon.ico">
+    <link rel="icon" href="../image/icon.ico" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
     <title>Trang chủ</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-warning mb-3">
-          <a class="navbar-brand mx-auto mb-0" href="/">
-            <h2>Tiệm tạp hóa Xíu Xiu <img src="../image/cat.ico" alt="cat" class="imageHome"></h2>
-          </a>
-          <div class="dropdown" id="loginButton"> </div>
-        </nav>
+      <nav class="navbar navbar-expand-lg mb-5">
+        <a class="navbar-brand mx-auto mb-0" href="/">
+          <h2 style="color: whitesmoke">
+            Cửa hàng đồ lưu niệm Three Group<img
+              src="../image/cat.ico"
+              alt="cat"
+              class="imageHome"
+            />
+          </h2>
+        </a>
+        <div class="dropdown" id="loginButton"></div>
+      </nav>
     </div>
-    <div class="container">  
+    <div class="container">
       <div class="row">
         <div class="col-12 col-lg-2 find">
           <div class="row mb-2 cart">
-            <button class="btn btn-outline-dark btn-lg" onclick="cart()" >Giỏ hàng</button>
+            <button class="btn btn-outline-dark btn-lg" onclick="cart()">
+              Giỏ hàng
+            </button>
           </div>
 
           <div class="row">
-            <h5 class="mt-2">Bộ lọc tìm kiếm</h5>
+            <h5 class="mt-2"><b>Bộ lọc tìm kiếm</b></h5>
           </div>
-          <div class="row" id="select">
-            
-          </div>
+          <h6>Danh mục</h6>
+          <div class="row" id="select"></div>
         </div>
-        <div class="col-12 col-lg content" >
+        <div class="col-12 col-lg content">
           <div class="row">
-            <form class="d-flex w-50 mb-3 float-end" onsubmit="return false;" id="form-search">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search" onkeyup="searchName()" id="search">
-              <img src="../image/search.png" id="input-img">
+            <form
+              class="d-flex w-50 mb-3 float-end"
+              onsubmit="return false;"
+              id="form-search"
+            >
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onkeyup="searchName()"
+                id="search"
+              />
+              <img src="../image/search.png" id="input-img" />
             </form>
-            <p class="ml-4"><b>Lưu ý: không cần login để đặt hàng</b></p>
+            <!-- <p class="ml-4"><b>Lưu ý: không cần login để đặt hàng</b></p> -->
+            <select
+              name="filterArrange"
+              id="filterArrange"
+              onchange="filterChange()"
+            >
+              <option value="0" selected>Sắp xếp theo</option>
+              <option value="1">Giá từ thấp đến cao</option>
+              <option value="2">Giá từ cao đến thấp</option>
+              <option value="3">Hàng mới nhất</option>
+              <option value="4">Bán chạy nhất</option>
+            </select>
           </div>
-          <div class="row" id = "goods">
-
-          </div>
+          <div class="row" id="goods"></div>
         </div>
       </div>
     </div>
     <div class="footer">
       <h4><b>Cám ơn quý khách đã ghé thăm</b></h4>
-      <p>Mọi thông tin liên hệ: <a href="https://www.facebook.com/callmepum">Pum Heo</a></p>
+      <p>Mọi thông tin liên hệ:</p>
     </div>
     <script>
       buttonLogin();
@@ -62,44 +106,60 @@
       filterType();
     </script>
 
-<div id="order" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+    <div id="order" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Đặt hàng</h4>
+          </div>
+          <div class="modal-body" id="orderData">
+            <label for="namepp"
+              >Họ tên <span style="color: red">*</span>:
+            </label>
+            <input type="text" id="namepp" name="namepp" /> <br />
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Đặt hàng</h4>
-      </div>
-      <div class="modal-body" id="orderData">
-        <label for="namepp">Họ tên <span style="color: red;">*</span>: </label>
-        <input type="text" id="namepp" name="namepp"> <br>
+            <label for="sdt">SĐT<span style="color: red">*</span>: </label>
+            <input type="text" id="sdt" name="sdt" /> <br />
 
-        <label for="sdt">SĐT<span style="color: red;">*</span>: </label>
-        <input type="text" id="sdt" name="sdt"> <br>
+            <label for="address"
+              >Địa chỉ<span style="color: red">*</span>:
+            </label>
+            <textarea name="address" id="address" cols="20" rows="2"></textarea>
+            <br />
 
-        <label for="address">Địa chỉ<span style="color: red;">*</span>: </label>
-        <textarea name="address" id="address" cols="20" rows="2"></textarea> <br>
-
-        <label for="note">Ghi chú (nếu có): </label>
-        <input type="text" id="note" name="note"> <br>
-        <p>Sản phẩm:</p>
-        <div>
-          <table id="ordersp">
-          </table>
+            <label for="note">Ghi chú (nếu có): </label>
+            <input type="text" id="note" name="note" /> <br />
+            <p>Sản phẩm:</p>
+            <div>
+              <table id="ordersp"></table>
+            </div>
+            <p class="mt-2">
+              Tổng cộng: <b><span id="tt"></span></b>
+            </p>
+            <label for="fb">Link FB (Nếu có): </label>
+            <input type="text" id="fb" name="fb" /> <br />
+            <p>Ghi chú: <span style="color: red">* Bắt buộc</span></p>
+          </div>
+          <div class="modal-footer">
+            <p id="noti" style="color: red"></p>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              onclick="submitCart()"
+            >
+              Xác nhận
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Đóng
+            </button>
+          </div>
         </div>
-        <p class="mt-2">Tổng cộng: <span id="tt"></span></p>
-        <label for="fb">Link FB (Nếu có): </label>
-        <input type="text" id="fb" name="fb"> <br>
-        <p>Ghi chú: <span style="color: red;">* Bắt buộc</span></p>
-      </div>
-      <div class="modal-footer">
-        <p id="noti" style="color: red;"></p>
-        <button type="button" class="btn btn-outline-primary" onclick="submitCart()">Xác nhận</button>
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
       </div>
     </div>
-  </div>
-</div>
-
-</body>
+  </body>
 </html>

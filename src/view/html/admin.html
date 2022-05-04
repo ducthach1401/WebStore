@@ -1,40 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <meta http-equiv="Cache-control" content="no-store"> -->
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/admin.css" />
     <script src="../js/env.js"></script>
     <script src="../js/admin.js"></script>
-    <link rel="icon" href="../image/icon.ico">
+    <link rel="icon" href="../image/icon.ico" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
     <title>Trang chủ</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-warning mb-3">
-          <a class="navbar-brand mx-auto mb-0" href="/">
-            <h2>Tiệm tạp hóa Xíu Xiu <img src="../image/cat.ico" alt="cat" class="imageHome"></h2>
-          </a>
-          <div class="dropdown" id="loginButton"> </div>
-        </nav>
+      <nav class="navbar navbar-expand-lg mb-5">
+        <a class="navbar-brand mx-auto mb-0" href="/">
+          <h2 style="color: whitesmoke">
+            Cửa hàng đồ lưu niệm Three Group<img
+              src="../image/cat.ico"
+              alt="cat"
+              class="imageHome"
+            />
+          </h2>
+        </a>
+        <div class="dropdown" id="loginButton"></div>
+      </nav>
     </div>
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-2">
-          <button class="btn btn-outline-dark" onclick="showItem()">Thêm sản phẩm</button> <br>
-          <button class="btn btn-outline-dark" onclick="showTypeForm()">Thêm loại hàng</button> <br>
-          <button class="btn btn-outline-dark" onclick="showDelete()">Xóa loại hàng</button>
+          <button class="btn btn-outline-dark" onclick="showItem()">
+            Thêm sản phẩm
+          </button>
+          <br />
+          <button class="btn btn-outline-dark" onclick="showTypeForm()">
+            Thêm loại hàng
+          </button>
+          <br />
+          <button class="btn btn-outline-dark" onclick="showDelete()">
+            Xóa loại hàng
+          </button>
         </div>
-        <div class="col-12 col-lg"  id = "goods">
-  
-        </div>
+        <div class="col-12 col-lg" id="goods"></div>
       </div>
     </div>
     <script>
@@ -44,7 +73,6 @@
     <!-- Modal -->
     <div id="repair" class="modal fade" role="dialog">
       <div class="modal-dialog">
-    
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
@@ -52,24 +80,38 @@
           </div>
           <div class="modal-body">
             <label for="idsp">ID: </label>
-            <input type="text" name="idsp" id="idsp" disabled> <br>
+            <input type="text" name="idsp" id="idsp" disabled /> <br />
 
             <label for="name">Tên: </label>
-            <input type="text" name="name" id="namesp"> <br>
+            <input type="text" name="name" id="namesp" /> <br />
 
             <label for="desc">Mô tả: </label>
-            <textarea name="desc" id="desc" cols="30" rows="5"></textarea> <br>
+            <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+            <br />
             <!-- <input type="text" name="desc" id="desc"> <br>  -->
             <label for="typeR">Loại hàng: </label>
-            <select name="typeR" id="typeR"></select> <br>
+            <select name="typeR" id="typeR"></select>
+            <br />
 
             <label for="price">Giá tiền: </label>
-            <input type="text" name="price" id="price"> <br>
+            <input type="text" name="price" id="price" /> <br />
             <!-- <label for="image"></label> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" onclick="submitRepair()">Submit</button>
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-outline-info"
+              onclick="submitRepair()"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -77,7 +119,6 @@
 
     <div id="updateImage" class="modal fade" role="dialog">
       <div class="modal-dialog">
-    
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
@@ -85,14 +126,26 @@
           </div>
           <div class="modal-body">
             <label for="idUpdate">ID: </label>
-            <input type="text" name="idUpdate" id="idUpdate" disabled> <br>
+            <input type="text" name="idUpdate" id="idUpdate" disabled /> <br />
 
             <label for="imageUpdate">Image: </label>
-            <input type="file" name="image" id="imageUpdate"> <br>
+            <input type="file" name="image" id="imageUpdate" /> <br />
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" onclick="updateImage()">Submit</button>
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-outline-info"
+              onclick="updateImage()"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -100,7 +153,6 @@
 
     <div id="additem" class="modal fade" role="dialog">
       <div class="modal-dialog">
-    
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
@@ -108,26 +160,38 @@
           </div>
           <div class="modal-body">
             <label for="addName">Tên: </label>
-            <input type="text" name="addName" id="addName"> <br>
+            <input type="text" name="addName" id="addName" /> <br />
 
             <label for="addDesc">Mô tả: </label>
-            <textarea name="addDesc" id="addDesc" cols="30" rows="5"></textarea> <br>
+            <textarea name="addDesc" id="addDesc" cols="30" rows="5"></textarea>
+            <br />
             <!-- <input type="text" name="addDesc" id="addDesc"> <br>  -->
             <label for="addType">Loại hàng: </label>
-            <select name="addType" id="addType">
-
-            </select> <br>
+            <select name="addType" id="addType"></select>
+            <br />
 
             <label for="addPrice">Giá tiền: </label>
-            <input type="text" name="addPrice" id="addPrice"> <br>
+            <input type="text" name="addPrice" id="addPrice" /> <br />
 
             <label for="addImage">Image: </label>
-            <input type="file" name="addImage" id="addImage"> <br>
+            <input type="file" name="addImage" id="addImage" /> <br />
             <!-- <label for="image"></label> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" onclick="addItem()">Submit</button>
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-outline-info"
+              onclick="addItem()"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -135,7 +199,6 @@
 
     <div id="showType" class="modal fade" role="dialog">
       <div class="modal-dialog">
-    
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
@@ -143,11 +206,23 @@
           </div>
           <div class="modal-body">
             <label for="typeData">Loại hàng: </label>
-            <input type="text" name="typeData" id="typeData"> <br>
+            <input type="text" name="typeData" id="typeData" /> <br />
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" onclick="addType()">Submit</button>
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-outline-info"
+              onclick="addType()"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -155,20 +230,23 @@
 
     <div id="deleteType" class="modal fade" role="dialog">
       <div class="modal-dialog">
-    
         <!-- Modal content-->
         <div class="modal-content text-center">
           <div class="modal-header">
             <h4 class="modal-title">Sửa hình ảnh</h4>
           </div>
-          <div class="modal-body" id="delete">
-            
-          </div>
+          <div class="modal-body" id="delete"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
-</body>
+  </body>
 </html>

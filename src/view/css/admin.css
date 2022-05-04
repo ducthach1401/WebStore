@@ -1,127 +1,139 @@
-.header{
-    font-size: large;
-    /* width: 90%  ; */
-    margin: auto;
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+  background-color: #fef6f5 !important;
+}
+
+.header {
+  font-size: large;
+  /* width: 90%  ; */
+  margin: auto;
+  color: whitesmoke !important;
+  background-color: #d0011b !important;
 }
 
 .header svg {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .imageHome {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 #loginButton {
-    position: relative;
-    right: 50px;
+  position: relative;
+  right: 50px;
 }
 
 .buttonLogin {
-    width: 150px;
+  width: 150px;
 }
 
 label {
-    width: 100px;
+  width: 100px;
 }
 
-
 #desc {
-    /* height: 50px; */
-    width: 188px;
+  /* height: 50px; */
+  width: 188px;
 }
 
 .data {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .card-body a {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
-.col-lg-2 button, .col-12 button {
-    width: 150px;
-    margin-bottom: 5px;
-    margin-left: 15px;
+.col-lg-2 button,
+.col-12 button {
+  width: 150px;
+  margin-bottom: 5px;
+  margin-left: 15px;
 }
 
-#additem input, #addDesc, #desc, #repair input {
-    width: 300px;
+#additem input,
+#addDesc,
+#desc,
+#repair input {
+  width: 300px;
 }
 
 .modal-body {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
-#addType, #typeR {
-    width: 150px;
-    height: 30px;
+#addType,
+#typeR {
+  width: 150px;
+  height: 30px;
 }
 
 #delete div {
-    width: 150px;
-    display: inline-block;
-    margin-bottom: 5px;
+  width: 150px;
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
 #delete button {
-    width: 150px;
-    margin-bottom: 5px;
+  width: 150px;
+  margin-bottom: 5px;
 }
 
 @media only screen and (max-width: 800px) {
-    h2 {
-        font-size: medium !important;
-    }
+  h2 {
+    font-size: medium !important;
+  }
 
-    h4 {
-        font-size: medium !important;
-    }
+  h4 {
+    font-size: medium !important;
+  }
 
-    #loginButton {
-        position: relative;
-        right: 0%;
-    }
+  #loginButton {
+    position: relative;
+    right: 0%;
+  }
 
-    #loginButton ul {
-        position: absolute;
-        right: 0%;
-        left: auto;
-    }
-    
+  #loginButton ul {
+    position: absolute;
+    right: 0%;
+    left: auto;
+  }
 }
 
 @media only screen and (max-width: 500px) {
 }
 
 @media only screen and (max-width: 360px) {
-    #additem input, #addDesc, #desc, #repair input {
-        width: 230px;
-    }
+  #additem input,
+  #addDesc,
+  #desc,
+  #repair input {
+    width: 230px;
+  }
 
-    label {
-        width: 100px;
-    }
+  label {
+    width: 100px;
+  }
 
-    #loginButton {
-        position: relative;
-        left: 60%;
-    }
+  #loginButton {
+    position: relative;
+    left: 60%;
+  }
 
-    #loginButton ul {
-        position: absolute;
-        right: 0%;
-        left: auto;
-    }
+  #loginButton ul {
+    position: absolute;
+    right: 0%;
+    left: auto;
+  }
 
-    #goods {
-        margin: auto;
-    }
+  #goods {
+    margin: auto;
+  }
 
-
-    #delete button {
-        width: 100px;
-        margin-bottom: 5px;
-    }
+  #delete button {
+    width: 100px;
+    margin-bottom: 5px;
+  }
 }
