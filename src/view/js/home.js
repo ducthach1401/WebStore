@@ -144,7 +144,7 @@ function showItem(item, row, count) {
     item._id,
   );
   temp +=
-    '<div><input type="number" class="w-25" min="1" id="number{}" onchange="total(this.id);" onkeyup="total(this.id);"><a href="#" class="btn b1tn-outline-info float-right" id="{}" onclick="addCart(this.id)">Thêm vào giỏ</a></div>'
+    '<div><input type="number" class="w-25" min="0" id="number{}" onchange="total(this.id);" onkeyup="total(this.id);"><a href="#" class="btn b1tn-outline-info float-right" id="{}" onclick="addCart(this.id)">Thêm vào giỏ</a></div>'
       .replace('{}', item._id)
       .replace('{}', item._id);
   temp += '</div>';
@@ -201,6 +201,13 @@ function searchName() {
 async function addCart(id) {
   const url = API_URL + '/v1/item/' + id;
   const quantity = parseInt(document.getElementById('number' + id).value);
+  if (isNaN(quantity) || quantity <= 0) {
+    Swal.fire({
+      title: 'Vui lòng chọn số lượng',
+      icon: 'error',
+    });
+    return;
+  }
   const response = await fetch(url, {
     method: 'GET',
     credentials: 'include',
@@ -209,13 +216,7 @@ async function addCart(id) {
     },
   });
   let data = await response.json();
-  if (isNaN(quantity)) {
-    Swal.fire({
-      title: 'Vui lòng chọn số lượng',
-      icon: 'error',
-    });
-    return;
-  }
+
   if (data.message == 'Success') {
     let check = window.localStorage.getItem(data.result[0].name);
     let cost = document
