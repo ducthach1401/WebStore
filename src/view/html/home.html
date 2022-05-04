@@ -37,11 +37,7 @@
       <nav class="navbar navbar-expand-lg mb-5">
         <a class="navbar-brand mx-auto mb-0" href="/">
           <h2 style="color: whitesmoke">
-            Cửa hàng đồ lưu niệm Three Group<img
-              src="../image/cat.ico"
-              alt="cat"
-              class="imageHome"
-            />
+            Cửa hàng đồ lưu niệm Three Group<img src="../image/cat.ico" alt="cat" class="imageHome" />
           </h2>
         </a>
         <div class="dropdown" id="loginButton"></div>
@@ -51,9 +47,7 @@
       <div class="row">
         <div class="col-12 col-lg-2 find">
           <div class="row mb-2 cart">
-            <button class="btn btn-outline-dark btn-lg" onclick="cart()">
-              Giỏ hàng
-            </button>
+            <button class="btn btn-outline-dark btn-lg" onclick="cart()">Giỏ hàng</button>
           </div>
 
           <div class="row">
@@ -64,11 +58,7 @@
         </div>
         <div class="col-12 col-lg content">
           <div class="row">
-            <form
-              class="d-flex w-50 mb-3 float-end"
-              onsubmit="return false;"
-              id="form-search"
-            >
+            <form class="d-flex w-50 mb-3 float-end" onsubmit="false;" id="form-search">
               <input
                 class="form-control"
                 type="search"
@@ -80,11 +70,7 @@
               <img src="../image/search.png" id="input-img" />
             </form>
             <!-- <p class="ml-4"><b>Lưu ý: không cần login để đặt hàng</b></p> -->
-            <select
-              name="filterArrange"
-              id="filterArrange"
-              onchange="filterChange()"
-            >
+            <select name="filterArrange" id="filterArrange" onchange="filterChange()">
               <option value="0" selected>Sắp xếp theo</option>
               <option value="1">Giá từ thấp đến cao</option>
               <option value="2">Giá từ cao đến thấp</option>
@@ -114,17 +100,16 @@
             <h4 class="modal-title">Đặt hàng</h4>
           </div>
           <div class="modal-body" id="orderData">
-            <label for="namepp"
-              >Họ tên <span style="color: red">*</span>:
-            </label>
+            <label for="namepp">Họ tên <span style="color: red">*</span>: </label>
             <input type="text" id="namepp" name="namepp" /> <br />
 
             <label for="sdt">SĐT<span style="color: red">*</span>: </label>
             <input type="text" id="sdt" name="sdt" /> <br />
 
-            <label for="address"
-              >Địa chỉ<span style="color: red">*</span>:
-            </label>
+            <label for="sdt">Gmail<span style="color: red">*</span>: </label>
+            <input type="text" id="gmail" name="gmail" /> <br />
+
+            <label for="address">Địa chỉ<span style="color: red">*</span>: </label>
             <textarea name="address" id="address" cols="20" rows="2"></textarea>
             <br />
 
@@ -143,20 +128,8 @@
           </div>
           <div class="modal-footer">
             <p id="noti" style="color: red"></p>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              onclick="submitCart()"
-            >
-              Xác nhận
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
-              Đóng
-            </button>
+            <button type="button" class="btn btn-outline-primary" onclick="submitCart()">Xác nhận</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
           </div>
         </div>
       </div>

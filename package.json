@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.js\" --fix"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,10 @@
     "mongoose": "^5.13.5",
     "multer": "^1.4.4",
     "node-fetch": "^2.6.1",
+    "nodemailer": "^6.7.5",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
   }
 }

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const IItem = mongoose.Schema(
   {
@@ -12,7 +12,7 @@ const IItem = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const IType = mongoose.Schema(
@@ -22,7 +22,7 @@ const IType = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const IUser = mongoose.Schema(
@@ -35,7 +35,7 @@ const IUser = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const IOrder = mongoose.Schema(
@@ -57,13 +57,13 @@ const IOrder = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-const Item = mongoose.model("Item", IItem);
-const Type = mongoose.model("Type", IType);
-const User = mongoose.model("User", IUser);
-const Order = mongoose.model("Order", IOrder);
+const Item = mongoose.model('Item', IItem);
+const Type = mongoose.model('Type', IType);
+const User = mongoose.model('User', IUser);
+const Order = mongoose.model('Order', IOrder);
 module.exports.Item = Item;
 module.exports.Type = Type;
 module.exports.User = User;
