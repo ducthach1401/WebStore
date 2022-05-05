@@ -421,7 +421,7 @@ async function submitCart() {
     setTimeout(() => {
       window.localStorage.clear();
       window.location.href = '/';
-    }, 1000);
+    }, 2000);
   } else {
     Swal.fire({
       title: res.message,
