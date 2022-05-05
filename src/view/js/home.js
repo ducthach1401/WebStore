@@ -139,14 +139,24 @@ function showItem(item, row, count) {
     .replace('{}', item._id)
     .replace('{}', item.cost.toLocaleString('vi-vn'));
   temp += '<p class="card-text">Đã bán: {}</p>'.replace('{}', item.quantity_purchased);
-  temp += '<p class="card-text">Thành tiền: <input type="text" id = "tt{}" disabled class="w-50"> </span> </p>'.replace(
-    '{}',
-    item._id,
-  );
+
   temp +=
-    '<div><input type="number" class="w-25" min="0" id="number{}" onchange="total(this.id);" onkeyup="total(this.id);"><a href="#" class="btn b1tn-outline-info float-right" id="{}" onclick="addCart(this.id)">Thêm vào giỏ</a></div>'
-      .replace('{}', item._id)
-      .replace('{}', item._id);
+    '<p class="card-text">Số lượng: <input type="number" class="w-25" min="0" id="number{}" onchange="total(this.id);" onkeyup="total(this.id);"></p>'.replace(
+      '{}',
+      item._id,
+    );
+
+  temp +=
+    '<p class="card-text">Thành tiền: <input type="text" id = "tt{}" disabled style="width: 35%;"> </span> </p>'.replace(
+      '{}',
+      item._id,
+    );
+
+  temp +=
+    '<p class="card-text additem"><a href="#" id="{}" class="btn" onclick="addCart(this.id)"><img src="../image/addCart.png" alt="addCart"  style="width: 45px; height: 45px;"></a></p>'.replace(
+      '{}',
+      item._id,
+    );
   temp += '</div>';
   temp += '</div>';
   row.innerHTML += temp;
