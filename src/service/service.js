@@ -437,8 +437,8 @@ module.exports.sendOrder = async (data) => {
       address: data.address,
       gmail: data.gmail,
       phoneNumber: data.sdt,
-      facebook: data.facebook ?? '',
-      note: data.note ?? '',
+      facebook: data.facebook,
+      note: data.note,
       items: data.goods,
       total: parseInt(data.totalPrice.split('.').join('')),
     });
