@@ -19,16 +19,5 @@ module.exports.modelType = (model) => {
 };
 
 module.exports.modelOrder = (model) => {
-  return {
-    _id: model._id,
-    nameUser: model.nameUser,
-    address: model.address,
-    phone: model.phone,
-    name: model.name,
-    quantity: model.quantity,
-    cost: model.cost,
-    total: model.total,
-    success: model.success,
-    dateOrder: model.dateOrder,
-  };
+  return model;
 };

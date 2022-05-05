@@ -427,7 +427,21 @@ module.exports.sendOrder = async (data) => {
       ':' +
       date.getMinutes() +
       '</p>';
-    const result = await this.sendMailOrder(data.gmail, text);
+    await this.sendMailOrder(data.gmail, text);
+    for (let ele of data.goods) {
+      ele.price = parseInt(ele.price.split('.').join(''));
+      ele.total = parseInt(ele.total.split('.').join(''));
+    }
+    await this.createOrder({
+      name: data.name,
+      address: data.address,
+      gmail: data.gmail,
+      phoneNumber: data.sdt,
+      facebook: data.facebook ?? '',
+      note: data.note ?? '',
+      items: data.goods,
+      total: parseInt(data.totalPrice.split('.').join('')),
+    });
     return {
       message: 'Success',
     };

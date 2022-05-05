@@ -48,6 +48,7 @@ async function getGoods() {
       'Content-Type': 'application/json',
     },
   });
+  document.getElementById('goods').innerHTML = '';
   let data = await response.json();
   if (data.message == 'Success') {
     let count = 0;
@@ -66,17 +67,17 @@ async function getGoods() {
       temp += '<p class="card-text">Mô tả: {}</p>'.replace('{}', item.description);
       temp += '<p class="card-text">Giá tiền: {} </p>'.replace('{}', item.cost.toLocaleString('vi-vn'));
       temp +=
-        '<div><a href="#" id="{}" class="btn btn-outline-info float-right" onclick="showModalRepair(this.id)">Thông tin</a></div>'.replace(
+        '<p class="card-text button-edit"><a href="#" id="{}" class="btn btn-outline-info float-right" onclick="showModalRepair(this.id)">Thông tin</a>'.replace(
           '{}',
           item._id,
         );
       temp +=
-        '<div><a href="#" id="{}" class="btn btn-outline-info float-right" onclick="submitImage(this.id)">Ảnh</a></div>'.replace(
+        '<a href="#" id="{}" class="btn btn-outline-info float-right" onclick="submitImage(this.id)">Ảnh</a>'.replace(
           '{}',
           item._id,
         );
       temp +=
-        '<div><a href="#" id="{}" class="btn btn-outline-danger float-right" onclick="deleteItem(this.id)">Xóa</a></div>'.replace(
+        '<a href="#" id="{}" class="btn btn-outline-danger float-right" onclick="deleteItem(this.id)">Xóa</a></p>'.replace(
           '{}',
           item._id,
         );
@@ -408,5 +409,69 @@ async function deleteType(id) {
       title: data.message,
       icon: 'error',
     });
+  }
+}
+
+async function showOrder() {
+  const goods = document.getElementById('goods');
+  goods.innerHTML = '';
+  const url = API_URL + '/v1/order';
+  const response = await fetch(url, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  let data = await response.json();
+  if (data.message == 'Success') {
+    let stt = 1;
+    let table = document.createElement('table');
+    table.setAttribute('id', 'info');
+    table.innerHTML =
+      ' <tr><th>STT</th><th>Tên</th><th>SDT</th><th>Địa chỉ</th> <th>Gmail</th> <th>Tổng tiền</th>   <th>Trạng thái</th> <th>Thanh toán</th> </tr>';
+    for (const order of data.result) {
+      const tr = document.createElement('tr');
+      let th = document.createElement('td');
+      th.innerText = stt++;
+      tr.appendChild(th);
+
+      th = document.createElement('td');
+      th.innerText = order.name;
+      tr.appendChild(th);
+
+      th = document.createElement('td');
+      th.innerText = order.phoneNumber;
+      tr.appendChild(th);
+
+      th = document.createElement('td');
+      th.innerText = order.address;
+      tr.appendChild(th);
+
+      th = document.createElement('td');
+      th.innerText = order.gmail;
+      tr.appendChild(th);
+
+      th = document.createElement('td');
+      th.innerText = order.total.toLocaleString('vi-vn');
+      tr.appendChild(th);
+
+      th = document.createElement('td');
+      th.innerText = order.status;
+      tr.appendChild(th);
+
+      // th = document.createElement('td');
+      // th.innerText = order.facebook;
+      // tr.appendChild(th);
+
+      th = document.createElement('td');
+      if (order.payment) {
+        th.innerText = 'x';
+      }
+      tr.appendChild(th);
+
+      table.appendChild(tr);
+    }
+    goods.appendChild(table);
   }
 }

@@ -41,19 +41,26 @@ const IUser = mongoose.Schema(
 const IOrder = mongoose.Schema(
   {
     _id: { type: mongoose.Types.ObjectId, default: mongoose.Types.ObjectId },
-    nameUser: { type: String, require: true },
+    name: { type: String, require: true },
     address: { type: String, require: true },
-    phone: { type: String, require: true },
-    goods: [
+    gmail: { type: String, require: true },
+    phoneNumber: { type: String, require: true },
+    facebook: { type: String, require: false },
+    note: { type: String, require: false },
+    items: [
       {
+        stt: { type: Number, require: true },
         name: { type: String, require: true },
         quantity: { type: Number, require: true },
-        cost: { type: Number, require: true },
+        price: { type: Number, require: true },
+        total: { type: Number, require: true },
       },
     ],
     total: { type: Number, require: true },
+    payment: { type: Boolean, require: true, default: false },
+    status: { type: String, require: true, default: 'Waiting for payment' },
     success: { type: Boolean, default: false },
-    dateOrder: Date,
+    dateOrder: { type: Date, default: Date.now() },
   },
   {
     timestamps: true,

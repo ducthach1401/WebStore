@@ -3,6 +3,22 @@ body {
   background-color: #fef6f5 !important;
 }
 
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th,
+tbody,
+td {
+  padding: 5px;
+  text-align: center;
+}
+.button-edit {
+  margin-top: 10px;
+}
+
 .header {
   font-size: large;
   /* width: 90%  ; */
