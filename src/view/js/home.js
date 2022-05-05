@@ -414,14 +414,7 @@ async function submitCart() {
   });
   let res = await response.json();
   if (res.message == 'Success') {
-    Swal.fire({
-      title: 'Đặt đơn thành công! Vui lòng kiểm tra mail để thanh toán!',
-      icon: 'success',
-    });
-    setTimeout(() => {
-      window.localStorage.clear();
-      window.location.href = '/';
-    }, 2000);
+    window.location.href = res.url;
   } else {
     Swal.fire({
       title: res.message,
@@ -437,5 +430,28 @@ async function filterChange() {
     getGoods();
   } else {
     filter(filterValue);
+  }
+}
+
+async function checkOrder() {
+  const url = document.location.href;
+  const status = url.split('?')[1];
+  if (status == 'success') {
+    window.localStorage.clear();
+    Swal.fire({
+      title: 'Đặt đơn thành công! Vui lòng kiểm tra mail!',
+      icon: 'success',
+    });
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 2000);
+  } else if (status == 'failed') {
+    Swal.fire({
+      title: 'Có lỗi khi thanh toán vui lòng thử lại',
+      icon: 'error',
+    });
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 2000);
   }
 }

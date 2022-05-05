@@ -58,7 +58,7 @@ const IOrder = mongoose.Schema(
     ],
     total: { type: Number, require: true },
     payment: { type: Boolean, require: true, default: false },
-    status: { type: String, require: true, default: 'Waiting for payment' },
+    status: { type: String, require: true, default: 'Chờ thanh toán' },
     success: { type: Boolean, default: false },
     dateOrder: { type: Date, default: Date.now() },
   },

@@ -5,6 +5,7 @@ const Type = Model.Type;
 const Item = Model.Item;
 const User = Model.User;
 const Order = Model.Order;
+const crypto = require('crypto');
 const cloudinary = require('cloudinary').v2;
 const nodemailer = require('nodemailer');
 const fetch = require('node-fetch');
@@ -279,9 +280,7 @@ module.exports.createOrder = async (data) => {
   try {
     const order = new Order(data);
     await order.save();
-    return {
-      message: 'Success',
-    };
+    return order._id;
   } catch (error) {
     throw error;
   }
@@ -402,37 +401,11 @@ module.exports.sendTextMessage = async (userId, text) => {
 
 module.exports.sendOrder = async (data) => {
   try {
-    let text = '<h2> Đơn xác nhận từ cửa hàng Three Group </h2>';
-    const date = new Date();
-    text += '<h3> Tên người đặt: ' + data.name + '</h3>';
-    text += '<p> SDT: ' + data.sdt + '</p>';
-    text += '<p> Địa chỉ: ' + data.address + '</p>';
-    if (data.facebook) {
-      text += '<p> Facebook: ' + data.facebook + '</p>';
-    }
-    if (data.note) {
-      text += '<p> Ghi chú: ' + data.facebook + '</p>';
-    }
-
-    for (let item of data.goods) {
-      text += `<p> ${item.stt}. ${item.name}, Số lượng:  ${item.quantity}, Đơn giá: ${item.price}, Thành tiền: ${item.total} </p>`;
-    }
-    text += `<h3> Tổng tiền: ${data.totalPrice} </h3>`;
-    text += `<h3> Cảm ơn quý khách đã ủng hộ </h3>`;
-    text +=
-      '<p>' +
-      [date.getDate(), date.getMonth(), date.getFullYear()].join('/') +
-      ' ' +
-      (date.getHours() + 7) +
-      ':' +
-      date.getMinutes() +
-      '</p>';
-    await this.sendMailOrder(data.gmail, text);
     for (let ele of data.goods) {
       ele.price = parseInt(ele.price.split('.').join(''));
       ele.total = parseInt(ele.total.split('.').join(''));
     }
-    await this.createOrder({
+    const orderId = await this.createOrder({
       name: data.name,
       address: data.address,
       gmail: data.gmail,
@@ -442,19 +415,112 @@ module.exports.sendOrder = async (data) => {
       items: data.goods,
       total: parseInt(data.totalPrice.split('.').join('')),
     });
-    return {
-      message: 'Success',
-    };
+    return await this.createBillMomo(orderId, data.totalPrice.split('.').join(''));
+    // return {
+    //   message: 'Success',
+    // };
   } catch (error) {
     throw error;
   }
+};
+
+module.exports.confirmOrder = async (dataMomo) => {
+  const data = await Order.findById(dataMomo.orderId);
+  let text = '<h2> Đơn xác nhận từ cửa hàng Three Group </h2>';
+  const date = new Date();
+  text += '<h3> Tên người đặt: ' + data.name + '</h3>';
+  text += '<p> SDT: ' + data.phoneNumber + '</p>';
+  text += '<p> Địa chỉ: ' + data.address + '</p>';
+  if (data.facebook) {
+    text += '<p> Facebook: ' + data.facebook + '</p>';
+  }
+  if (data.note) {
+    text += '<p> Ghi chú: ' + data.note + '</p>';
+  }
+
+  for (let item of data.items) {
+    text += `<p> ${item.stt}. ${item.name}, Số lượng:  ${item.quantity}, Đơn giá: ${item.price}, Thành tiền: ${item.total} </p>`;
+  }
+  text += `<p> Tổng tiền: <b>${data.total}</b> </p>`;
+  text += `<p> Quý khách đã thanh toán thành công đơn hàng sẽ sớm vận chuyển trong hôm nay!</p>`;
+  text += `<h3> Cảm ơn quý khách đã ủng hộ </h3>`;
+  text +=
+    '<p>' +
+    [date.getDate(), date.getMonth(), date.getFullYear()].join('/') +
+    ' ' +
+    (date.getHours() + 7) +
+    ':' +
+    date.getMinutes() +
+    '</p>';
+
+  await this.sendMailOrder(data.gmail, text);
+  await Order.updateOne(
+    {
+      _id: dataMomo.orderId,
+    },
+    {
+      payment: true,
+      status: 'Đã thanh toán',
+    },
+  );
 };
 
 module.exports.sendMailOrder = async (gmail, text) => {
   await mail.sendMail({
     from: process.env.MAIL_ADDRESS,
     to: gmail,
-    subject: 'Xác nhận Order từ Three Group',
+    subject: 'Xác nhận thanh toán thành công từ Three Group',
     html: text,
   });
+};
+
+module.exports.createBillMomo = async (orderId, price) => {
+  const urlApi = 'https://test-payment.momo.vn/gw_payment/transactionProcessor';
+  const API_URL = process.env.HOST;
+  const payload = {
+    partnerCode: process.env.PARTNER_CODE,
+    accessKey: process.env.ACCESS_KEY,
+    requestId: Math.round(Date.now() / 1000).toString(),
+    amount: price.toString(),
+    orderId: orderId.toString(),
+    orderInfo: 'Payment',
+    returnUrl: `${API_URL}/v1/momo/callback`,
+    notifyUrl: `${API_URL}/v1/momo/callback`,
+    extraData: '',
+    requestType: 'captureMoMoWallet',
+    signature: '',
+  };
+  payload.signature = crypto
+    .createHmac('sha256', process.env.SECRET_KEY)
+    .update(
+      'partnerCode=' +
+        payload.partnerCode +
+        '&accessKey=' +
+        payload.accessKey +
+        '&requestId=' +
+        payload.requestId +
+        '&amount=' +
+        payload.amount +
+        '&orderId=' +
+        payload.orderId +
+        '&orderInfo=' +
+        payload.orderInfo +
+        '&returnUrl=' +
+        payload.returnUrl +
+        '&notifyUrl=' +
+        payload.notifyUrl +
+        '&extraData=' +
+        payload.extraData,
+    )
+    .digest('hex');
+
+  const callAPI = await fetch(urlApi, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+  let data = await callAPI.json();
+  return data.payUrl;
 };

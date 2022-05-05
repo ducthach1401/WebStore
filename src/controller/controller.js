@@ -224,5 +224,33 @@ module.exports.postWebhook = (req, res) => {
 module.exports.sendOrder = async (req, res) => {
   const data = req.body;
   const result = await service.sendOrder(data);
-  res.json(result);
+  res.json({
+    message: 'Success',
+    url: result,
+  });
+};
+
+module.exports.callbackPost = async (req, res) => {
+  const data = req.body;
+  if (data.errorCode == 0) {
+    await service.confirmOrder(data);
+    res.json({
+      message: 'Success',
+    });
+  } else {
+    res.json({
+      message: 'Failed',
+    });
+  }
+};
+
+module.exports.callbackGet = async (req, res) => {
+  const data = req.query;
+  const Host = process.env.HOST;
+  if (data.errorCode == 0) {
+    await service.confirmOrder(data);
+    res.redirect(`${Host}?success`);
+  } else {
+    res.redirect(`${Host}?failed`);
+  }
 };

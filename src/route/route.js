@@ -57,4 +57,6 @@ route.route('/orders').get(authenUser, controller.getAllOrders);
 
 route.route('/webhook').get(controller.verifyWebhook).post(controller.postWebhook);
 
+route.route('/momo/callback').get(controller.callbackGet).post(controller.callbackPost);
+
 module.exports = route;
