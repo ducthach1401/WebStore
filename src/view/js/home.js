@@ -415,7 +415,7 @@ async function submitCart() {
   let res = await response.json();
   if (res.message == 'Success') {
     Swal.fire({
-      title: 'Đặt đơn thành công!',
+      title: 'Đặt đơn thành công! Vui lòng kiểm tra mail để thanh toán!',
       icon: 'success',
     });
     setTimeout(() => {
